@@ -1,0 +1,126 @@
+/* ~~~~~~~~ FONTS ~~~~~~~~ */
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+/* ~~~~~~~~ VARIABLES ~~~~~~~~ */
+
+:root {
+    --primary-color: #031333;
+    --secondary-color: #EE7429;
+    --bs-link-hover-color: #EE7429;
+    --bs-font-sans-serif: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--primary-color);
+    font-family: var(--bs-font-sans-serif);
+}
+
+body {
+    background-color: var(--primary-color);
+    font-family: var(--bs-font-sans-serif);
+}
+
+/* ~~~~~~~~ PICTURES ~~~~~~~~ */
+
+#logo-calista {
+    width: 80%;
+}
+
+/* ~~~~~~~~ FORM ~~~~~~~~ */
+
+#form-height {
+    height: 85vh;
+}
+
+.form-control {
+    border: 1px solid white;
+    background-color: var(--primary-color);
+}
+
+.form-control:focus {
+    background-color: var(--primary-color);
+    border: 3px solid var(--secondary-color);
+}
+
+.form-floating > label {
+    color: white;
+}
+
+.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .form-control-plaintext:focus, form-control
+.form-floating > .form-control-plaintext:not(:placeholder-shown) {
+    color: white;
+}
+
+.link-account-form {
+    color: var(--secondary-color) !important;
+    text-decoration: none;
+}
+
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
+
+.fa-eye, .fa-eye-slash {
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    transform: translateY(-220%);
+    right: 16px;
+}
+
+#text-obligation {
+    color: #fff;
+    text-align: justify;
+}
+
+/* ~~~~ FORM INPUT BEHAVIOURS ~~~~ */
+
+input:not(:focus):not(:placeholder-shown):invalid {
+    border: 3px solid rgb(153, 33, 57);
+    transition: all .5s;
+    color: white;
+}
+
+.valid-input:not(:focus):not(:placeholder-shown):valid {
+    border: 3px solid rgb(83, 139, 83);
+    transition: all .5s;
+}
+
+.link-account-form:hover, .link-account-form:focus {
+    color: #fff !important;
+}
+
+/* ~~~~~~~~ BUTTONS ~~~~~~~~ */
+
+.btn-orange {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--secondary-color);
+    --bs-btn-border-color: var(--secondary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--secondary-color);
+    --bs-btn-hover-border-color: var(--secondary-color);
+    --bs-btn-focus-shadow-rgb: 76, 91, 106;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--secondary-color);
+    --bs-btn-active-border-color: var(--secondary-color);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--secondary-color);
+    --bs-btn-disabled-border-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* ~~~~~~~~ FOOTER ~~~~~~~~ */
+
+footer a, footer p{
+    color: #fff;
+}
