@@ -53,18 +53,7 @@
 
   <!-- ~~~~~~~~~~ FOOTER ~~~~~~~~~~ -->
 
-  <footer>
-    <div class="container">
-      <!-- <div class="d-flex col-md-4 mx-auto justify-content-md-between text-center mb-4"> -->
-      <div class="row col-sm-9 col-lg-5 mx-auto text-center mb-4">
-        <a href="#" class="col-sm-12 col-lg-6 mb-3">Mentions légales</a>
-        <a href="#" class="col-sm-12 col-lg-6">Politique de confidentialité</a>
-      </div>
-      <div class="text-center">
-        <!-- <div class="col-sm-9 col-md-7 col-lg-5 mx-auto text-center"> -->
-        <p>&#169; 2023 Calista - Tous droits réservés.</p>
-      </div>
-  </footer>
+  <?php require view_path('components/footer.php'); ?>
 
   <!-- ~~~~~~~~~~ JAVASCRIPT ~~~~~~~~~~ -->
 
