@@ -28,14 +28,11 @@ body {
 /* ~~~~~~~~ PICTURES ~~~~~~~~ */
 
 #logo-calista {
+    margin-top: 80px;
     width: 80%;
 }
 
 /* ~~~~~~~~ FORM ~~~~~~~~ */
-
-#form-height {
-    height: 85vh;
-}
 
 .form-control {
     border: 1px solid white;
@@ -117,6 +114,65 @@ input:not(:focus):not(:placeholder-shown):invalid {
     --bs-btn-disabled-bg: var(--secondary-color);
     --bs-btn-disabled-border-color: var(--secondary-color);
     color: var(--primary-color);
+}
+
+/* ~~~~~~~~ NAVBAR ~~~~~~~~ */
+
+:root {
+    --color-theme-dark: #560013;
+    --color-theme-medium: #87001E;
+    --color-theme-light: #FF7593;
+    /* add all the other colors */
+}
+
+#profile-icon-nav {
+    width: 30px;
+}
+
+#logo-nav { 
+    width: 140px;
+}
+
+/* ~~~~ NAVBAR COLORS ~~~ */
+
+.navbar-dark {
+    background-color: var(--color-theme-dark);
+    --bs-navbar-color: #fff;
+    --bs-navbar-hover-color: var(--color-theme-light);
+    --bs-navbar-active-color: var(--color-theme-light);
+}
+
+.dropdown-menu {
+    --bs-dropdown-bg: #fff;
+    --bs-dropdown-link-color: var(--color-theme-dark);
+    --bs-dropdown-link-hover-color: #fff;
+    --bs-dropdown-link-hover-bg: var(--color-theme-dark);
+    --bs-dropdown-link-active-color: var(--color-theme-light);
+    --bs-dropdown-link-active-bg: var(--color-theme-dark);
+}
+
+#nav-profile-name {
+    margin-left: 8px;
+}
+
+#help-icon-nav {
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+#help-icon-nav::before {
+    font-family: "Font Awesome 5 Free"; content: "\f059";
+    margin-right: 10px;
+}
+
+#dashboard-nav::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0db";
+    margin-right: 5px;
+}
+
+#boards-nav::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0ce";
+    margin-right: 5px;
 }
 
 /* ~~~~~~~~ FOOTER ~~~~~~~~ */
