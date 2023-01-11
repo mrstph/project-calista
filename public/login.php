@@ -1,10 +1,10 @@
 <?php
 
-// Load App
+// Load Appw
 require_once __DIR__ . '/../autoloader.php';
 
 // Start Controller : NAMESPACE\CLASSNAME
-$controller = new Controllers\LoginController();
+$controller = new Controllers\Auth\LoginController();
 
 // Call Controller method
 switch ($_SERVER['REQUEST_METHOD']) {

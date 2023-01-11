@@ -6,17 +6,22 @@
 const APP_BASE_PATH = __DIR__;
 
 /*
- * Main
+ * Configs
  */
+require_once 'configs/app.php';
 require_once 'configs/database.php';
-require_once 'supports/helpers.php';
+
+// Force debug
+if (APP_ENVIRONNEMENT !== 'production') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 /*
- * Controllers Loader
+ * Mains
  */
-require_once 'Controllers/Controller.php';
-require_once 'Controllers/LoginController.php';
-require_once 'Controllers/RegisterController.php';
+require_once 'supports/helpers.php';
 
 /*
  * Models Loader
@@ -24,5 +29,19 @@ require_once 'Controllers/RegisterController.php';
 require_once 'Models/Model.php';
 require_once 'Models/User.php';
 require_once 'Models/Board.php';
-require_once 'Models/List_app.php';
-require_once 'Models/Card.php';
+require_once 'Models/Enumeration.php';
+
+/*
+ * Controllers Loader
+ */
+
+// Main
+require_once 'Controllers/Controller.php';
+require_once 'Controllers/WelcomeController.php';
+require_once 'Controllers/HomeController.php';
+require_once 'Controllers/BoardsController.php';
+require_once 'Controllers/EnumerationsController.php';
+
+// Auth
+require_once 'Controllers/Auth/AuthController.php';
+require_once 'Controllers/Auth/LoginController.php';

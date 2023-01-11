@@ -13,7 +13,7 @@
                 <li class="nav-item dropdown">
                     <a id="boards-nav" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes tableaux</a>
                     <div class="dropdown-menu">
-                    <!-- code that retrieves the tables  -->
+                        <!-- code that retrieves the tables  -->
                         <a class="dropdown-item" href="#">Tableau 1</a>
                         <a class="dropdown-item" href="#">Tableau 2</a>
                     </div>

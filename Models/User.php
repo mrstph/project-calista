@@ -29,20 +29,20 @@ class User extends Model
         return parent::find($id);
     }
 
-    // /**
-    //  * @return array
-    //  */
-    // public function currentUserNotes()
-    // {
-    //     $noteModel = new Note();
+    /**
+     * @return array
+     */
+    public function boards()
+    {
+        $boardsModel = new Board();
 
-    //     $req = $this->db()->prepare("SELECT * FROM {$noteModel->getTable()} WHERE user_id = :user_id");
-    //     $req->execute([
-    //         ':user_id' => $this->id,
-    //     ]);
+        $req = $this->db()->prepare("SELECT * FROM {$boardsModel->getTable()} WHERE user_id = :user_id");
+        $req->execute([
+            ':user_id' => $this->id,
+        ]);
 
-    //     return $req->fetchAll(PDO::FETCH_ASSOC);
-    // }
+        return $req->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    }
 
     /**
      * @param string $email
@@ -53,7 +53,7 @@ class User extends Model
     {
         $userModel = new self();
 
-        $result = $userModel::executeSql(
+        $result = $userModel::select(
             "SELECT * FROM {$userModel->getTable()} WHERE email = :email AND password = :password",
             [
                 ':email' => $email,
@@ -67,5 +67,15 @@ class User extends Model
         }
 
         return $userModel->hydrate($result);
+    }
+
+
+    /**
+     * @param Board $borad
+     * @return null|void
+     */
+    public function attachBoard(Board $borad) 
+    {
+        // CODE
     }
 }

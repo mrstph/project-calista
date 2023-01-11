@@ -2,7 +2,9 @@
 
 namespace Controllers;
 
-class Controller
+use Models\User;
+
+abstract class Controller
 {
     /**
      * Chemin du dossier des vues à partir de la racine
@@ -20,12 +22,48 @@ class Controller
     const REDIRECT_AUTH = 'home.php';
 
     /**
+     * @var User
+     */
+    protected static $user = false;
+
+    /**
      * Controller constructor.
      */
     public function __construct()
     {
         // Globally start the session if use a Controller.
         session();
+    }
+
+    /**
+     * Get current user hydrated.
+     *
+     * @return User|null
+     */
+    protected function user() 
+    {
+        if (self::$user === false) {
+            $id = self::getCurrentUserId();
+            if ($id) {
+                self::$user = User::find(self::getCurrentUserId());
+            }
+
+            if (empty(self::$user)) {
+                self::$user = null;
+            }
+        }
+
+        return self::$user;
+    }
+
+    /**
+     * @param array $data
+     * @return null|void
+     */
+    protected function responseJson(array $data)
+    {
+        echo json_encode($data);
+        exit();
     }
 
     /**

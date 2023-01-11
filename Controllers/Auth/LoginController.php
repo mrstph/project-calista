@@ -1,10 +1,10 @@
 <?php
 
-namespace Controllers;
+namespace Controllers\Auth;
 
 use Models\User;
 
-class LoginController extends Controller
+class LoginController extends AuthController
 {
     /**
      * LoginController constructor.
@@ -23,7 +23,7 @@ class LoginController extends Controller
     {
         $this->redirectIfAuthenticated();
 
-        $this->view('login.php');
+        return $this->view('login.php');
     }
 
     /**
@@ -39,7 +39,7 @@ class LoginController extends Controller
         $pass = $_POST['password'];
 
         // Validation form
-        if (!$email or !$pass) {
+        if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
             messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
             return redirect('login.php');
         }
@@ -67,7 +67,6 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        unset(session()['id']);
         session_destroy();
         return redirect('index.php');
     }
