@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Models\User;
+use Models\User_app;
 
 abstract class Controller
 {
@@ -40,12 +40,12 @@ abstract class Controller
      *
      * @return User|null
      */
-    protected function user() 
+    protected function user()
     {
         if (self::$user === false) {
             $id = self::getCurrentUserId();
             if ($id) {
-                self::$user = User::find(self::getCurrentUserId());
+                self::$user = User_app::find(self::getCurrentUserId());
             }
 
             if (empty(self::$user)) {
@@ -75,7 +75,7 @@ abstract class Controller
      */
     protected function view(string $fileName, array $data = [])
     {
-        $filePath = base_path(self::VIEW_PATH.'/'.$fileName);
+        $filePath = base_path(self::VIEW_PATH . '/' . $fileName);
 
         if (file_exists($filePath)) {
             ob_start();

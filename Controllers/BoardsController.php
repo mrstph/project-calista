@@ -30,7 +30,7 @@ class BoardsController extends Controller
 
         $board = Board::create($data);
 
-        return redirect('/borads/show.php?id='.$board->id);
+        return redirect('/boards/show.php?id=' . $board->id);
     }
 
     /**
@@ -47,7 +47,7 @@ class BoardsController extends Controller
         $lists = $board->enumerations();
 
         // Sort lists by position
-        usort($lists, fn($a, $b) => $a['position'] <=> $b['position']);
+        usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
 
         return $this->view('boards/show.php', [
             'board' => $board,
@@ -67,7 +67,7 @@ class BoardsController extends Controller
 
         $board = Board::update($boardId, $data);
 
-        return redirect('/borads/show.php?id='.$boardId);
+        return redirect('/boards/show.php?id=' . $boardId);
     }
 
     /**

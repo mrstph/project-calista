@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Models\User;
+use Models\User_app;
 
 class HomeController extends Controller
 {
@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::find(self::getCurrentUserId()); // Return a User class (model) hydrated.
+        $user = User_app::find(self::getCurrentUserId()); // Return a User class (model) hydrated.
         $boards = $user->boards(); // Return a array of array
 
         return $this->view('home.php', [
@@ -33,5 +33,4 @@ class HomeController extends Controller
             'boards' => $boards,
         ]);
     }
-
 }

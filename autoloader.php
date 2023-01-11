@@ -27,7 +27,7 @@ require_once 'supports/helpers.php';
  * Models Loader
  */
 require_once 'Models/Model.php';
-require_once 'Models/User.php';
+require_once 'Models/User_app.php';
 require_once 'Models/Board.php';
 require_once 'Models/Enumeration.php';
 
@@ -37,7 +37,6 @@ require_once 'Models/Enumeration.php';
 
 // Main
 require_once 'Controllers/Controller.php';
-require_once 'Controllers/WelcomeController.php';
 require_once 'Controllers/HomeController.php';
 require_once 'Controllers/BoardsController.php';
 require_once 'Controllers/EnumerationsController.php';
@@ -45,3 +44,4 @@ require_once 'Controllers/EnumerationsController.php';
 // Auth
 require_once 'Controllers/Auth/AuthController.php';
 require_once 'Controllers/Auth/LoginController.php';
+require_once 'Controllers/Auth/RegisterController.php';

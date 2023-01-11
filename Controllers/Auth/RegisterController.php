@@ -4,7 +4,7 @@ namespace Controllers\Auth;
 
 use Models\User_app;
 
-class LoginController extends AuthController
+class RegisterController extends AuthController
 {
     /**
      * LoginController constructor.
@@ -23,7 +23,7 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        return $this->view('login.php');
+        return $this->view('register.php');
     }
 
     /**
@@ -31,7 +31,7 @@ class LoginController extends AuthController
      *
      * @return null
      */
-    public function login()
+    public function register()
     {
         $this->redirectIfAuthenticated();
 
@@ -57,17 +57,6 @@ class LoginController extends AuthController
         session('id', $user->id);
 
         // Response OK
-        return redirect('home.php');
-    }
-
-    /**
-     * Logout process
-     *
-     * @return void
-     */
-    public function logout()
-    {
-        session_destroy();
         return redirect('login.php');
     }
 }
