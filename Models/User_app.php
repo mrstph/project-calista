@@ -42,7 +42,7 @@ class User_app extends Model
     {
         $boardsModel = new Board();
 
-        $req = $this->db()->prepare("SELECT * FROM {$boardsModel->getTable()} WHERE user_id = :id_user");
+        $req = $this->db()->prepare("SELECT * FROM {$boardsModel->getTable()} WHERE id_user_app = :id_user");
         $req->execute([
             ':id_user' => $this->id_user_app,
         ]);
@@ -59,7 +59,7 @@ class User_app extends Model
     {
         $userModel = new self();
 
-        $result = $userModel::select(
+        $result = $userModel->select( //$userModel::select instead?
             "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email AND password_user_app = :password",
             [
                 ':email' => $email_user_app,
@@ -83,5 +83,14 @@ class User_app extends Model
     public function attachBoard(Board $board)
     {
         // CODE
+    }
+
+    /**
+     * @param Board $board
+     * @return null|void
+     */
+    public function createUser(array $data)
+    {
+        return parent::create($data);
     }
 }

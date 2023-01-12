@@ -35,28 +35,35 @@ class RegisterController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
+        $first_name_user_app = $_POST['firstname'];
+        $last_name_user_app = $_POST['lastname'];
+        $email_user_app = $_POST['mail'];
+        $password_user_app = $_POST['password'];
 
         // Validation form
-        if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
-            messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('login.php');
+        if (!$this->checkEmail($email_user_app) or !$this->checkPassword($password_user_app) or !$this->checkPassword($first_name_user_app) or !$this->checkPassword($last_name_user_app)) {
+            messages('Tous les champs doivent être remplis'); // Add a message in session (see method in supports/helpers.php)
+            return redirect('register.php');
         }
 
-        // Get model user hydrated
-        $user = User_app::findUserByCredentials($email, $pass);
+        // // Get model user hydrated
+        // $user = User_app::findUserByCredentials($email, $pass);
 
-        // Check user
-        if (!$user) {
-            messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('login.php');
-        }
+        // // Check user
+        // if (!$user) {
+        //     messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
+        //     return redirect('login.php');
+        // }
 
-        // Define the auth information in session
-        session('id', $user->id);
+        // // Define the auth information in session
+        // session('id', $user->id);
 
         // Response OK
+        //User creation in DB
+        $xy = new User_app;
+
+        $xy->createUser($first_name_user_app, $last_name_user_app, $email_user_app, $password_user_app);
+        messages('Votre compte a été créé avec succès !');
         return redirect('login.php');
     }
 }

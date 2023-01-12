@@ -29,7 +29,9 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Profil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php">Se déconnecter</a>
+                        <form action="logout.php" method="POST"><a class="dropdown-item"><input class="btn" type="submit" value="Se déconnecter"></a></form>
+
+                        <!-- <a class="dropdown-item" href="logout.php">Se déconnecter</a> -->
                     </div>
                 </li>
             </ul>

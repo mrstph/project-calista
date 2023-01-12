@@ -26,7 +26,7 @@ abstract class Model
      *
      * @var string
      */
-    protected $identifier = 'id';
+    protected $identifier = 'id_user_app';
 
     /**
      * Hydrate current model process.
@@ -59,8 +59,8 @@ abstract class Model
         $bindData = [];
         foreach ($data as $key => $value) {
             $sqlKeys[] = $key;
-            $sqlValues[] = ':'.$key;
-            $bindData[':'.$key] = $value;
+            $sqlValues[] = ':' . $key;
+            $bindData[':' . $key] = $value;
         }
         $sqlKeys = implode(', ', $sqlKeys);
         $sqlValues = implode(', ', $sqlValues);
@@ -125,7 +125,7 @@ abstract class Model
         $builder = new static();
 
         if ($limit) {
-            $sql .= ' LIMIT '.$limit;
+            $sql .= ' LIMIT ' . $limit;
         }
 
         $req = $builder::db()->prepare($sql);
@@ -147,7 +147,7 @@ abstract class Model
     public function getTable()
     {
         if (empty($this->table)) {
-            throw new \Exception('The model "'.__CLASS__.'" $table is empty !');
+            throw new \Exception('The model "' . __CLASS__ . '" $table is empty !');
         }
 
         return $this->table;
@@ -162,7 +162,7 @@ abstract class Model
     public function getIdentifier()
     {
         if (empty($this->identifier)) {
-            throw new \Exception('The model "'.__CLASS__.'" $identifier is empty !');
+            throw new \Exception('The model "' . __CLASS__ . '" $identifier is empty !');
         }
 
         return $this->identifier;
@@ -197,9 +197,9 @@ abstract class Model
     protected static function openConnection()
     {
         $DSN = DB_PDO_DRIVER
-            .':host='.DB_HOSTNAME
-            .';port='.DB_PORT
-            .';dbname='.DB_DATABASE;
+            . ':host=' . DB_HOSTNAME
+            . ';port=' . DB_PORT
+            . ';dbname=' . DB_DATABASE;
 
         try {
             self::$db = new PDO($DSN, DB_USERNAME, DB_PASSWORD, [

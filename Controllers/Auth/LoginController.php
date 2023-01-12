@@ -35,7 +35,7 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        $email = $_POST['email'];
+        $email = $_POST['mail'];
         $pass = $_POST['password'];
 
         // Validation form
@@ -54,7 +54,7 @@ class LoginController extends AuthController
         }
 
         // Define the auth information in session
-        session('id', $user->id);
+        session('id', $user->id_user_app);
 
         // Response OK
         return redirect('home.php');

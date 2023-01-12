@@ -1,7 +1,7 @@
 <?php
 
 // Load App
-require_once __DIR__.'/../autoloader.php';
+require_once __DIR__ . '/../autoloader.php';
 
 // Start Controller : NAMESPACE\CLASSNAME
 $controller = new Controllers\Auth\LoginController();

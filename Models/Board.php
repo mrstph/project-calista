@@ -9,7 +9,7 @@ class Board extends Model
      *
      * @var string
      */
-    protected $table = 'boards';
+    protected $table = 'board';
 
     public $id;
     public $user_id;
