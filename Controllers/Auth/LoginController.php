@@ -35,7 +35,7 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        $email = $_POST['mail'];
+        $email = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
         $pass = $_POST['password'];
 
         // Validation form

@@ -73,6 +73,37 @@ abstract class Model
         return $instance;
     }
 
+        /**
+     * update a row in BD.
+     *
+     * @param array $data
+     * @return self
+     */
+    public static function update(array $data)
+    {
+        $model = new static();
+        $instance = $model->hydrate($data);
+
+        $sqlKeys = [];
+        $sqlValues = [];
+        $bindData = [];
+        foreach ($data as $key => $value) {
+            $sqlKeys[] = $key;
+            $sqlValues[] = ':' . $key;
+            $bindData[':' . $key] = $value;
+        }
+        $sqlKeys = implode(', ', $sqlKeys);
+        $sqlValues = implode(', ', $sqlValues);
+
+        // $req = self::db()->prepare("INSERT INTO {$instance->getTable()} ($sqlKeys) VALUE ($sqlValues)");
+        $req = self::db()->prepare("UPDATE {$instance->getTable()} SET ($sqlKeys) VALUE ($sqlValues)");
+        $req->execute($bindData);
+
+        $instance->{$instance->getIdentifier()} = self::db()->lastInsertId();
+
+        return $instance;
+    }
+
     /**
      * fetch() + hydrate()
      *

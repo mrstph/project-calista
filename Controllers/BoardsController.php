@@ -2,9 +2,10 @@
 
 namespace Controllers;
 
+use PDO;
 use Models\Board;
-use Models\Enumeration;
-use Models\User;
+use Models\List_app;
+use Models\User_app;
 
 class BoardsController extends Controller
 {
@@ -24,13 +25,22 @@ class BoardsController extends Controller
      */
     public function add()
     {
+        $name_board = $_POST['nameboard'];
+        $color_board = $_POST['color'];
+        $id_user_app = session('id');
+        
         $data = [
-            // ... $_POST
+            'name_board' => $name_board,
+            // 'cration_date_board' => /* date now*/,
+            // 'position_board' => /* next position */,
+            'color_board' => $color_board,
+            'id_user_app' => $id_user_app
         ];
 
-        $board = Board::create($data);
-
-        return redirect('/boards/show.php?id=' . $board->id);
+        $board = Board::createBoard($data);
+        // $id_board = Board::find();
+        // $id = Board::find($id);
+        return redirect('boards/show.php?id='. $board->id_board);
     }
 
     /**

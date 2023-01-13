@@ -11,9 +11,16 @@ class Board extends Model
      */
     protected $table = 'board';
 
-    public $id;
-    public $user_id;
-    public $title;
+    // public $id;
+    // public $user_id;
+    // public $title;
+
+    public $id_board;
+    public $name_board;
+    public $creation_date_board;
+    public $position_board;
+    public $color_board;
+    public $id_user_app; //keep it?
 
     /**
      * fetch() + hydrate()
@@ -21,18 +28,18 @@ class Board extends Model
      * @param int|string $id
      * @return Board
      */
-    public static function find($id): Board
+    public static function find($id_board): Board
     {
-        return parent::find($id);
+        return parent::find($id_board);
     }
 
     /**
      * @param int|string $id
      * @return bool
      */
-    public static function update($id, array $data)
+    public static function updateBoard(array $data)
     {
-        // CODE
+        return parent::update($data);
     }
 
     /**
@@ -41,7 +48,7 @@ class Board extends Model
      * @param array $data
      * @return Board
      */
-    public static function create(array $data): Board
+    public static function createBoard(array $data): Board
     {
         return parent::create($data);
     }
@@ -49,20 +56,20 @@ class Board extends Model
     /**
      * @return User
      */
-    public function user(): User
+    public function user(): User_app
     {
-        return User::find($this->user_id);
+        return User_app::find($this->id_user_app);
     }
 
     /**
-     * @return Enumeration
+     * @return List_App
      */
-    public function enumerations(): array
+    public function listapp(): array
     {
-        $model = new Enumeration();
+        $model = new List_App();
 
-        return $this->select("SELECT * FROM {$model->getTable()} WHERE board_id = :board_id", [
-            'board_id' => $this->id,
+        return $this->select("SELECT * FROM {$model->getTable()} WHERE id_board = :board_id", [
+            'board_id' => $this->id_board,
         ]);
     }
 }

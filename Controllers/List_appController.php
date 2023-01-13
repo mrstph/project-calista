@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
-use Models\Enumeration;
+use Models\List_app;
 
-class EnumerationsController extends Controller
+class List_appController extends Controller
 {
     /**
      * HomeController constructor.
@@ -23,18 +23,20 @@ class EnumerationsController extends Controller
     public function add()
     {
         // Insert DB
-        $list = Enumeration::create([
-            'board_id' => $_POST['board_id'],
-            'title' => $_POST['title'],
+        $list = List_app::create([
+            // 'board_id' => $_POST['board_id'],
+            // 'title' => $_POST['title'],
+            'id_board' => $_POST['idboard'],
+            'id_name' => $_POST['nameboard'],
         ]);
 
         if ($list) {
             $json = [
-                'list' => [
-                    'id' => $list->id,
-                    'board_id' => $list->board_id,
-                    'position' => $list->position,
-                    'title' => $list->title,
+                'list_app' => [
+                    'id_list_app' => $list->id_list_app,
+                    'id_board' => $list->id_board,
+                    'position_list_app' => $list->position_list_app,
+                    'name_list_app' => $list->name_list_app,
                 ],
             ];
         } else {
