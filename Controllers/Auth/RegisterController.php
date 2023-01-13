@@ -60,9 +60,16 @@ class RegisterController extends AuthController
 
         // Response OK
         //User creation in DB
-        $xy = new User_app;
+        $user = new User_app();
+        $data = [
+            'first_name_user_app' => $first_name_user_app,
+            'email_user_app' => $email_user_app,
+            'last_name_user_app' => $last_name_user_app,
+            'password_user_app' => $password_user_app
+        ];
 
-        $xy->createUser($first_name_user_app, $last_name_user_app, $email_user_app, $password_user_app);
+        $user->createUser($data);
+        
         messages('Votre compte a été créé avec succès !');
         return redirect('login.php');
     }
