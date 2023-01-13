@@ -25,7 +25,16 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img id="profile-icon-nav" src="assets/pictures/profile-picture.svg" alt="Menu de profil"><span id="nav-profile-name">Chris Balla</span></a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img id="profile-icon-nav" src="assets/pictures/profile-picture.svg" alt="Menu de profil">
+                            <span id="nav-profile-name">
+                                <?php
+                                    echo(session('firstname'));
+                                    echo(' ');
+                                    echo(session('lastname')); 
+                                ?>
+                            </span>
+                    </a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Profil</a>
                         <div class="dropdown-divider"></div>
