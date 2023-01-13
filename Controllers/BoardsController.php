@@ -54,7 +54,7 @@ class BoardsController extends Controller
         }
 
         $board = Board::find($boardId);
-        $lists = $board->enumerations();
+        $lists = $board->listapp();
 
         // Sort lists by position
         usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
