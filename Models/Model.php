@@ -26,7 +26,7 @@ abstract class Model
      *
      * @var string
      */
-    protected $identifier = 'id_user_app';
+    protected $identifier = 'id';
 
     /**
      * Hydrate current model process.
@@ -73,7 +73,7 @@ abstract class Model
         return $instance;
     }
 
-        /**
+    /**
      * update a row in BD.
      *
      * @param array $data

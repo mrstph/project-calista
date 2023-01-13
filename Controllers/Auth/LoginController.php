@@ -54,9 +54,9 @@ class LoginController extends AuthController
         }
 
         // Define the auth information in session
-        session('id', $user->id_user_app);
-        session('firstname', $user->first_name_user_app);
-        session('lastname', $user->last_name_user_app);
+        session('id', $user->id);
+        // session('firstname', $user->first_name_user_app);
+        // session('lastname', $user->last_name_user_app);
 
         // Response OK
         return redirect('home.php');

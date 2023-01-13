@@ -15,12 +15,17 @@ class Board extends Model
     // public $user_id;
     // public $title;
 
-    public $id_board;
+    public $id;
     public $name_board;
     public $creation_date_board;
     public $position_board;
     public $color_board;
     public $id_user_app; //keep it?
+
+    public function getName()
+    {
+        return $this->name_board;
+    }
 
     /**
      * fetch() + hydrate()
@@ -28,9 +33,9 @@ class Board extends Model
      * @param int|string $id
      * @return Board
      */
-    public static function find($id_board): Board
+    public static function find($id): Board
     {
-        return parent::find($id_board);
+        return parent::find($id);
     }
 
     /**
@@ -58,7 +63,7 @@ class Board extends Model
      */
     public function user(): User_app
     {
-        return User_app::find($this->id_user_app);
+        return User_app::find($this->id);
     }
 
     /**
@@ -69,7 +74,7 @@ class Board extends Model
         $model = new List_App();
 
         return $this->select("SELECT * FROM {$model->getTable()} WHERE id_board = :board_id", [
-            'board_id' => $this->id_board,
+            'board_id' => $this->id,
         ]);
     }
 }

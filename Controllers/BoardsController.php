@@ -27,20 +27,18 @@ class BoardsController extends Controller
     {
         $name_board = $_POST['nameboard'];
         $color_board = $_POST['color'];
-        $id_user_app = session('id');
-        
+        $id = session('id');
+
         $data = [
             'name_board' => $name_board,
             // 'cration_date_board' => /* date now*/,
             // 'position_board' => /* next position */,
             'color_board' => $color_board,
-            'id_user_app' => $id_user_app
+            'id_user_app' => $id
         ];
 
         $board = Board::createBoard($data);
-        // $id_board = Board::find();
-        // $id = Board::find($id);
-        return redirect('boards/show.php?id='. $board->id_board);
+        return redirect('/boards/show.php?id=' . $board->id);
     }
 
     /**

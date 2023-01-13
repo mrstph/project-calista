@@ -10,7 +10,7 @@ abstract class AuthController extends Controller
     {
         return !empty($email) and strlen($email) > 5;
     }
-    
+
     public function checkPassword(string $password): bool
     {
         return !empty($password) and strlen($password) > 4;

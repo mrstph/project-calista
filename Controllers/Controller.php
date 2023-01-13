@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\User_app;
+use Models\Board;
 
 abstract class Controller
 {
@@ -79,9 +80,18 @@ abstract class Controller
 
         if (file_exists($filePath)) {
             ob_start();
+            //get user and board infos everywhere from the session and send it on every pages with view
+            $userid = self::getCurrentUserId();
+            if ($userid) {
+                $user = User_app::find($userid);
+            }
+            if ($userid) {
+                $userboards = Board::find($userid);
+            }
             foreach ($data as $var => $value) {
                 $$var = $value;
             }
+            // dd($userboard);
             require $filePath; // Importe/Charge le code php de la vue
             ob_end_flush();
         }

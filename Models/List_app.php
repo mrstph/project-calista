@@ -16,7 +16,7 @@ class List_app extends Model
     // public $position;
     // public $title;
 
-    public $id_list_app;
+    public $id;
     public $name_list_app;
     public $position_list_app;
     public $creation_date_list_app;
@@ -55,6 +55,6 @@ class List_app extends Model
      */
     public function board(): Board
     {
-        return Board::find($this->id_board);
+        return Board::find($this->id);
     }
 }

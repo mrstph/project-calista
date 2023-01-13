@@ -1,21 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container gap-3">
-        <a class="navbar-brand" href="#"><img id="logo-nav" src="assets/pictures/calista-logo-white.svg" alt="Calista, application Trello like"></a>
+        <a class="navbar-brand" href="/index.php"><img id="logo-nav" src="/assets/pictures/calista-logo-white.svg" alt="Calista, application Trello like"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a id="dashboard-nav" class="nav-link active" href="#">Mon espace de travail
+                    <a id="dashboard-nav" class="nav-link active" href="/home.php">Mon espace de travail
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="boards-nav" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes tableaux</a>
                     <div class="dropdown-menu">
-                        <!-- code that retrieves the tables  -->
-                        <a class="dropdown-item" href="#">Tableau 1</a>
-                        <a class="dropdown-item" href="#">Tableau 2</a>
+                        <?php foreach ($boards as $board) : ?>
+                            <a class="dropdown-item" href="<?php echo '/boards/show.php?id=' . $board['id'] ?>"><?php echo $board['name_board'] ?></a>
+                        <?php endforeach; ?>
                     </div>
                 </li>
             </ul>
@@ -26,14 +26,12 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img id="profile-icon-nav" src="assets/pictures/profile-picture.svg" alt="Menu de profil">
-                            <span id="nav-profile-name">
-                                <?php
-                                    echo(session('firstname'));
-                                    echo(' ');
-                                    echo(session('lastname')); 
-                                ?>
-                            </span>
+                        <img id="profile-icon-nav" src="/assets/pictures/profile-picture.svg" alt="Menu de profil">
+                        <span id="nav-profile-name">
+                            <?php
+                            echo ($user->getFullName());
+                            ?>
+                        </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Profil</a>

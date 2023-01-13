@@ -33,7 +33,7 @@ class List_appController extends Controller
         if ($list) {
             $json = [
                 'list_app' => [
-                    'id_list_app' => $list->id_list_app,
+                    'id_list_app' => $list->id,
                     'id_board' => $list->id_board,
                     'position_list_app' => $list->position_list_app,
                     'name_list_app' => $list->name_list_app,

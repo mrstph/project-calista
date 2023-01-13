@@ -29,7 +29,7 @@ class HomeController extends Controller
         $boards = $user->boards(); // Return a array of array
 
         return $this->view('home.php', [
-            'user' => $user,
+            // 'user' => $user,
             'boards' => $boards,
         ]);
     }

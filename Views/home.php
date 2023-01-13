@@ -27,23 +27,23 @@
         <h4>HOME</h4>
 
         <?php foreach ($boards as $board) : ?>
-            <a href="<?php echo '/boards/show.php?id=' . $board['id_user_app'] ?>"><?php echo $board['name_board'] ?></a>
+            <a href="<?php echo '/boards/show.php?id=' . $board['id'] ?>"><?php echo $board['name_board'] ?></a>
             <br>
         <?php endforeach; ?>
-        
+
         <!-- ~~~~~~~~~~ TEST FORM ~~~~~~~~~~ -->
 
-        <form class="mt-4" method="post" action="boards/add.php">
+        <form class="mt-4" method="post" action="/boards/add.php">
             <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
-            <label for="nameboard">Nom du tableau</label>
+                <input type="text" class="form-control" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
+                <label for="nameboard">Nom du tableau</label>
             </div>
             <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="color" id="color" placeholder="Couleur">
-            <label for="color">Couleur</label>
+                <input type="text" class="form-control" name="color" id="color" placeholder="Couleur">
+                <label for="color">Couleur</label>
             </div>
             <div class="d-grid">
-            <button class="btn btn-orange fw-bold" type="submit">Confirmer</button>
+                <button class="btn btn-orange fw-bold" type="submit">Confirmer</button>
             </div>
         </form>
 

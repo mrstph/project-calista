@@ -14,10 +14,10 @@ if (!function_exists('base_path')) {
     {
         // Add a slash in string begin
         if ($string and substr($string, 0, 1) !== '/') {
-            $string = '/'.$string;
+            $string = '/' . $string;
         }
 
-        return APP_BASE_PATH.$string;
+        return APP_BASE_PATH . $string;
     }
 }
 
@@ -31,10 +31,10 @@ if (!function_exists('view_path')) {
     {
         // Add a slash in string begin
         if ($string and substr($string, 0, 1) !== '/') {
-            $string = '/'.$string;
+            $string = '/' . $string;
         }
 
-        return base_path(\Controllers\Controller::VIEW_PATH.$string);
+        return base_path(\Controllers\Controller::VIEW_PATH . $string);
     }
 }
 
@@ -117,7 +117,7 @@ if (!function_exists('redirect')) {
     function redirect(string $url, int $statusCode = 200)
     {
         http_response_code($statusCode);
-        header('Location: '.$url);
+        header('Location: ' . $url);
         exit();
     }
 }

@@ -69,7 +69,7 @@ class RegisterController extends AuthController
         ];
 
         $user->createUser($data);
-        
+
         messages('Votre compte a été créé avec succès !');
         return redirect('login.php');
     }
