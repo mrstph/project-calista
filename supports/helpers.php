@@ -77,17 +77,20 @@ if (!function_exists('messages')) {
      *
      * @return array|bool
      */
-    function messages($value = null)
+    function messages($value = null, $status = null)
     {
         $messages = session('messages') ?? [];
+        if ($status === null) {
+            $status = 'alert-danger';
+        }
 
         if ($value) {
             // Set key-value in messages array
-            $messages[] = $value; // Set key-value in messages
+            $messages[] = [$value, $status];
             session('messages', $messages); // Update message in session array
             return true; // Set is ok
         }
-
+        // dd($messages);
         // Return messages array
         return $messages;
     }

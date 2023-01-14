@@ -26,8 +26,8 @@
     <main>
         <h4>HOME</h4>
 
-        <?php foreach ($boards as $board) : ?>
-            <a href="<?php echo '/boards/show.php?id=' . $board['id'] ?>"><?php echo $board['name_board'] ?></a>
+        <?php foreach ($userboards as $userboard) : ?>
+            <a href="<?php echo '/boards/show.php?id=' . $userboard['id'] ?>"><?php echo $userboard['name_board'] ?></a>
             <br>
         <?php endforeach; ?>
 
@@ -52,7 +52,6 @@
     <!-- ~~~~~~~~~~ JAVASCRIPT ~~~~~~~~~~ -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/javascript/javascript.js"></script>
 
 </body>
 

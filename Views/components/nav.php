@@ -7,14 +7,14 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a id="dashboard-nav" class="nav-link active" href="/home.php">Mon espace de travail
+                    <a id="dashboard-nav" class="nav-link" href="/home.php">Mon espace de travail
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="boards-nav" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes tableaux</a>
                     <div class="dropdown-menu">
-                        <?php foreach ($boards as $board) : ?>
-                            <a class="dropdown-item" href="<?php echo '/boards/show.php?id=' . $board['id'] ?>"><?php echo $board['name_board'] ?></a>
+                        <?php foreach ($userboards as $userboard) : ?>
+                            <a class="dropdown-item" href="<?php echo '/boards/show.php?id=' . $userboard['id'] ?>"><?php echo $userboard['name_board'] ?></a>
                         <?php endforeach; ?>
                     </div>
                 </li>
@@ -36,7 +36,8 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Profil</a>
                         <div class="dropdown-divider"></div>
-                        <form action="logout.php" method="POST"><a class="dropdown-item"><input class="btn" type="submit" value="Se déconnecter"></a></form>
+                        <!-- <form action="logout.php" method="POST"><a class="dropdown-item"><input class="btn" type="submit" value="Se déconnecter"></a></form> -->
+                        <a href="/logout.php" class="dropdown-item">Se déconnecter</a>
 
                         <!-- <a class="dropdown-item" href="logout.php">Se déconnecter</a> -->
                     </div>
