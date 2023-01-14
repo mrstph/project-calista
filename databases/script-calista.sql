@@ -170,10 +170,11 @@ insert into Board (id_board, name_board, creation_date_board, position_board, co
 # insert data into list_app
 
 insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Aero 8', 1, '2023-01-07', 1);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('9000', 2, '2023-01-18', 2);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Pajero', 3, '2023-01-07', 2);
+
 /*
-insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (2, '9000', 2, '2023-01-18', 2);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (3, 'Neon', 3, '2023-01-07', 3);
-insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (4, 'Pajero', 4, '2023-01-07', 4);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (5, 'Blackwood', 5, '2023-01-16', 5);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (6, 'Pathfinder', 6, '2023-01-09', 6);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (7, 'RX-7', 7, '2023-01-17', 7);

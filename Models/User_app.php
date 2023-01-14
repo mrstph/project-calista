@@ -102,3 +102,5 @@ class User_app extends Model
         return $this->first_name_user_app . ' ' . $this->last_name_user_app;
     }
 }
+
+// ucfirst

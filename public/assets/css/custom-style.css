@@ -20,11 +20,6 @@ body {
     font-family: var(--bs-font-sans-serif);
 }
 
-body {
-    background-color: var(--primary-color);
-    font-family: var(--bs-font-sans-serif);
-}
-
 /* ~~~~~~~~ PICTURES ~~~~~~~~ */
 
 #logo-calista {
