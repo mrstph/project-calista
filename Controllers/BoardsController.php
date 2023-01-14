@@ -53,11 +53,9 @@ class BoardsController extends Controller
 
         $board = Board::find($boardId);
         $lists = $board->listapp();
-
         // Sort lists by position
-        usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
-
-        return $this->view('boards/show.php', [
+        // usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
+        return $this->view('/boards/show.php', [
             'board' => $board,
             'lists' => $lists,
         ]);
@@ -83,7 +81,7 @@ class BoardsController extends Controller
      */
     public function delete()
     {
-        $boardId = $_POST['id'];
+        $boardId = $_POST['id']; //POST
         Board::delete($boardId);
 
         return redirect('/home.php');

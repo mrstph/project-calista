@@ -23,7 +23,7 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        return $this->view('login.php');
+        return $this->view('/login.php');
     }
 
     /**
@@ -41,7 +41,7 @@ class LoginController extends AuthController
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
             messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('login.php');
+            return redirect('/login.php');
         }
 
         // Get model user hydrated
@@ -50,7 +50,7 @@ class LoginController extends AuthController
         // Check user
         if (!$user) {
             messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('login.php');
+            return redirect('/login.php');
         }
 
         // Define the auth information in session
@@ -59,7 +59,7 @@ class LoginController extends AuthController
         // session('lastname', $user->last_name_user_app);
 
         // Response OK
-        return redirect('home.php');
+        return redirect('/home.php');
     }
 
     /**
@@ -70,6 +70,6 @@ class LoginController extends AuthController
     public function logout()
     {
         session_destroy();
-        return redirect('login.php');
+        return redirect('/login.php');
     }
 }
