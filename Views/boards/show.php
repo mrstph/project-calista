@@ -24,34 +24,81 @@
     </header>
 
     <main>
-        <h4>Ajouter une liste</h4>
-        <form id="form-list-create">
-            <input type="text" name="board_id" id="board_id" value="<?php echo $board->id ?>" hidden>
-            <input type="text" name="title" id="title">
-            <input type="submit" value="Ajouter une liste">
+
+        <h4>Supprimer tableau</h4>
+        <form method="POST" action="/boards/delete.php">
+            <input type="submit" value="Supprimer un tableau">
         </form>
 
-        <ul id="list_app">
-            <?php foreach ($lists as $list) {
-                echo '<li>'
-                    . 'Title: ' . $list['title']
-                    . ' / Id: ' . $list['id']
-                    . ' / Position: ' . $list['position']
-                    . '</li>';
-            } ?>
+        <h4>Ajouter une liste</h4>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-list">
+            Ajouter une liste
+        </button>
+
+        <ul id="lists">
+            <?php foreach ($lists as $list) : ?>
+                <div><?php echo $list['name_list_app'] ?></div>
+            <?php endforeach; ?>
+
+            <?php //foreach ($lists as $list) {
+            //echo '<li>'
+            //   . 'Title: ' . $list['name_list_app']
+            //   . ' / Id: ' . $list['id']
+            //. '</li>';
+            //}
+            ?>
         </ul>
     </main>
+
+    <!-- ~~~~~~~~~~ ADD LIST MODAL ~~~~~~~~~~ -->
+
+    <div class="modal fade" id="create-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-list-create" method="post" action="/list_app/add.php">
+                        <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
+                        <input type="text" name="name" id="name">
+                        <input type="submit" form="form-list-create" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- ~~~~~~~~~~ JAVASCRIPT ~~~~~~~~~~ -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/javascript/javascript.js"></script>
+
+    <script>
+        let myModal = document.getElementById('create-list');
+        let myInput = document.getElementById('name');
+        let button = document.querySelectorAll('input[typer="submit"]');
+
+        //when modal is shown, put the focus on the input field
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus();
+        });
+        //when modal is hidden, reset the value of the input field
+        myModal.addEventListener('hidden.bs.modal', () => {
+            myInput.value = "";
+        });
+    </script>
+
     <script>
         document
             .getElementById('form-list-create')
             .addEventListener('submit', function(event) {
                 event.preventDefault();
-
                 // FORM
                 fetch("/list_app/add.php", {
                         method: "POST",
@@ -63,10 +110,11 @@
                         document.getElementById('lists').innerHTML =
                             document.getElementById('lists').innerHTML + (
                                 '<li>' +
-                                'Title: ' + json.list.title +
+                                'Title: ' + json.list.name_list_app +
                                 ' / Id: ' + json.list.id +
                                 ' / Position: ' + json.list.position +
                                 '</li>');
+                        console.log(json);
                     })
                     .catch((error) => {
                         console.error(error);

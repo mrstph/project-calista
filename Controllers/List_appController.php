@@ -24,19 +24,18 @@ class List_appController extends Controller
     {
         // Insert DB
         $list = List_app::create([
-            // 'board_id' => $_POST['board_id'],
-            // 'title' => $_POST['title'],
-            'id_board' => $_POST['idboard'],
-            'id_name' => $_POST['nameboard'],
+            'id_board' => $_POST['id_board'],
+            'name_list_app' => $_POST['name'],
         ]);
 
         if ($list) {
             $json = [
                 'list_app' => [
-                    'id_list_app' => $list->id,
-                    'id_board' => $list->id_board,
-                    'position_list_app' => $list->position_list_app,
+                    'id' => $list->id,
                     'name_list_app' => $list->name_list_app,
+                    // 'position_list_app' => $list->position_list_app,
+                    // 'creation_date_list_app' => ,
+                    'id_board' => $list->id_board
                 ],
             ];
         } else {
@@ -44,7 +43,6 @@ class List_appController extends Controller
                 'error' => 'An error has occured !',
             ];
         }
-
         return $this->responseJson($json);
     }
 }

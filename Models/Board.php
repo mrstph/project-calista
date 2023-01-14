@@ -22,10 +22,10 @@ class Board extends Model
     public $color_board;
     public $id_user_app; //keep it?
 
-    public function getName()
-    {
-        return $this->name_board;
-    }
+    // public function getName()
+    // {
+    //     return $this->name_board;
+    // }
 
     /**
      * fetch() + hydrate()
@@ -48,7 +48,7 @@ class Board extends Model
     }
 
     /**
-     * Create a row Borad in BD.
+     * Create a row Board in BD.
      *
      * @param array $data
      * @return Board

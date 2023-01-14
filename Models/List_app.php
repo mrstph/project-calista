@@ -41,10 +41,11 @@ class List_app extends Model
     {
         $model = new static();
 
-        $lastPosition = $model::select("SELECT MAX(position) as position FROM {$model->getTable()}", [], 1)['position'];
+        $lastPosition = $model::select("SELECT MAX(position_list_app) as position FROM {$model->getTable()}", [], 1)['position'];
 
         $data = array_merge(
-            $data, ['position' => ($lastPosition + 1)]
+            $data,
+            ['position_list_app' => ($lastPosition + 1)]
         );
 
         return parent::create($data);

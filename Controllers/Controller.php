@@ -84,14 +84,11 @@ abstract class Controller
             $userid = self::getCurrentUserId();
             if ($userid) {
                 $user = User_app::find($userid);
-            }
-            if ($userid) {
-                $userboards = Board::find($userid);
+                $userboards = $user->boards();
             }
             foreach ($data as $var => $value) {
                 $$var = $value;
             }
-            // dd($userboard);
             require $filePath; // Importe/Charge le code php de la vue
             ob_end_flush();
         }
