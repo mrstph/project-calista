@@ -35,8 +35,10 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        $email = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
+        $email = $_POST['mail'];
         $pass = $_POST['password'];
+        // $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        //filter_var(, FILTER_VALIDATE_EMAIL);
 
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
@@ -55,8 +57,6 @@ class LoginController extends AuthController
 
         // Define the auth information in session
         session('id', $user->id);
-        // session('firstname', $user->first_name_user_app);
-        // session('lastname', $user->last_name_user_app);
 
         // Response OK
         return redirect('/home.php');

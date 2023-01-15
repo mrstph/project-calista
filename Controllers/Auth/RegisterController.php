@@ -35,9 +35,10 @@ class RegisterController extends AuthController
     {
         // $this->redirectIfAuthenticated();
 
-        $first_name_user_app = $_POST['firstname'];
-        $last_name_user_app = $_POST['lastname'];
+        $first_name_user_app = ucfirst(strtolower($_POST['firstname']));
+        $last_name_user_app = ucfirst(strtolower($_POST['lastname']));
         $email_user_app = $_POST['mail'];
+        // $password_user_app = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $password_user_app = $_POST['password'];
 
         // Validation form
@@ -50,8 +51,8 @@ class RegisterController extends AuthController
         //User creation in DB
         $user = new User_app();
         $data = [
-            'first_name_user_app' => ucfirst($first_name_user_app),
-            'last_name_user_app' => ucfirst($last_name_user_app),
+            'first_name_user_app' => $first_name_user_app,
+            'last_name_user_app' => $last_name_user_app,
             'email_user_app' => $email_user_app,
             'password_user_app' => $password_user_app
         ];
