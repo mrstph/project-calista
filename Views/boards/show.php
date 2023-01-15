@@ -27,8 +27,15 @@
 
         <h4>Supprimer tableau</h4>
         <form method="POST" action="/boards/delete.php">
+            <input type="text" name="id" id="id_board" value="<?php echo $board->id; ?>" hidden>
             <input type="submit" value="Supprimer un tableau">
         </form>
+
+        <h4>Modifier le tableau</h4>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify-board">
+            Modifier le tableau
+        </button>
 
         <h4>Ajouter une liste</h4>
         <!-- Button trigger modal -->
@@ -74,6 +81,29 @@
         </div>
     </div>
 
+    <!-- ~~~~~~~~~~ MODIFY BOARD MODAL ~~~~~~~~~~ -->
+
+    <div class="modal fade" id="modify-board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-modify-board" method="post" action="/boards/update.php">
+                        <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
+                        <input type="text" name="name" id="name">
+                        <input type="text" name="color" id="color">
+                        <input type="submit" form="form-modify-board" class="btn btn-primary" value="Modifier le tableau" data-bs-dismiss="modal">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ~~~~~~~~~~ JAVASCRIPT ~~~~~~~~~~ -->
 
@@ -82,7 +112,6 @@
     <script>
         let myModal = document.getElementById('create-list');
         let myInput = document.getElementById('name');
-        let button = document.querySelectorAll('input[typer="submit"]');
 
         //when modal is shown, put the focus on the input field
         myModal.addEventListener('shown.bs.modal', () => {

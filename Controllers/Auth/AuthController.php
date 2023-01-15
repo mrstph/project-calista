@@ -8,11 +8,8 @@ abstract class AuthController extends Controller
 {
     public function checkEmail(string $email): bool
     {
-        // if (empty($email)){
-        //     echo  'Email is required';
-        // }
+       
 
-        // if 
 
 
 

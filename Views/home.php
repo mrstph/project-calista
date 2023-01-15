@@ -52,7 +52,7 @@
     <!-- ~~~~~~~~~~ ADD LIST MODAL ~~~~~~~~~~ -->
 
     <div class="modal fade" id="create-board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title fs-5" id="exampleModalLabel">Créer un tableau</h2>
@@ -62,8 +62,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="form-create-board" method="post" action="/boards/add.php">
-                        <input type="text" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
-                        <input type="text" name="color" id="color" placeholder="Couleur">
+                        <!-- form control size ok but not color -->
+                        <input class="mb-2 form-control" type="text" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%;">
+                            <input type="radio" class="btn-check" name="color" id="btnradio1" autocomplete="off" value="blue">
+                            <label class="btn btn-outline-primary" for="btnradio1">Bleu</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio2" autocomplete="off" value="red">
+                            <label class="btn btn-outline-primary" for="btnradio2">Rouge</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio3" autocomplete="off" value="orange">
+                            <label class="btn btn-outline-primary" for="btnradio3">Orange</label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -80,8 +90,7 @@
 
     <script>
         let myModal = document.getElementById('create-board');
-        let myInput = document.getElementById('name');
-        let button = document.querySelectorAll('input[typer="submit"]');
+        let myInput = document.getElementById('nameboard');
 
         //when modal is shown, put the focus on the input field
         myModal.addEventListener('shown.bs.modal', () => {
