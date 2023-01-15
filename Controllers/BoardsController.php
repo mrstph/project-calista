@@ -14,7 +14,7 @@ class BoardsController extends Controller
      */
     public function __construct()
     {
-        // Vérifie si l'utilisateur est connecté sinon redirection
+        // Checks if the user is logged in otherwise redirects
         $this->redirectIfNotAuthenticated();
 
         parent::__construct();
@@ -66,14 +66,18 @@ class BoardsController extends Controller
      */
     public function update()
     {
-        $boardId = $_POST['id'];
+        $name_board = $_POST['name'];
+        $color_board = $_POST['color'];
+        $id = $_POST['id_board'];
         $data = [
-            // ... $_POST
+            'name_board' => $name_board,
+            'color_board' =>  $color_board,
+            'id' => $id
         ];
 
-        $board = Board::update($boardId, $data);
+        Board::updateBoard($data, $id); //$board = Board::update($boardId, $data);
 
-        return redirect('/boards/show.php?id=' . $boardId);
+        return redirect('/boards/show.php?id=' . $id);
     }
 
     /**

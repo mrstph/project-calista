@@ -42,11 +42,11 @@ class Board extends Model
      * @param int|string $id
      * @return bool
      */
-    public static function updateBoard(array $data)
-    {
-        return parent::update($data);
-    }
 
+    public static function updateBoard(array $data, $id)
+    {
+        return parent::update($data, $id);
+    }
     /**
      * Create a row Board in BD.
      *

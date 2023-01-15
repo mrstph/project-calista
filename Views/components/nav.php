@@ -34,7 +34,7 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="#">Profil</a>
+                        <a class="dropdown-item" href="<?php echo '/user_app/show.php' ?>">Profil</a>
                         <div class="dropdown-divider"></div>
                         <!-- <form action="logout.php" method="POST"><a class="dropdown-item"><input class="btn" type="submit" value="Se déconnecter"></a></form> -->
                         <a href="/logout.php" class="dropdown-item">Se déconnecter</a>

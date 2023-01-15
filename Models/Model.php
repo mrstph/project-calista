@@ -79,28 +79,24 @@ abstract class Model
      * @param array $data
      * @return self
      */
-    public static function update(array $data)
+    public static function update(array $data, $id)
     {
         $model = new static();
         $instance = $model->hydrate($data);
 
-        $sqlKeys = [];
-        $sqlValues = [];
+        $setStatements = [];
         $bindData = [];
         foreach ($data as $key => $value) {
-            $sqlKeys[] = $key;
-            $sqlValues[] = ':' . $key;
-            $bindData[':' . $key] = $value;
+            $placeholder = ':' . $key;
+            $setStatements[] = "{$key} = {$placeholder}";
+            $bindData[$placeholder] = $value;
         }
-        $sqlKeys = implode(', ', $sqlKeys);
-        $sqlValues = implode(', ', $sqlValues);
+        $setStatements = implode(', ', $setStatements);
 
-        // $req = self::db()->prepare("INSERT INTO {$instance->getTable()} ($sqlKeys) VALUE ($sqlValues)");
-        $req = self::db()->prepare("UPDATE {$instance->getTable()} SET ($sqlKeys) VALUE ($sqlValues)");
-        $req->execute($bindData);
-
-        $instance->{$instance->getIdentifier()} = self::db()->lastInsertId();
-
+        $query = "UPDATE {$instance->getTable()} SET {$setStatements} WHERE id = :id";
+        $stmt = self::db()->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute($bindData);
         return $instance;
     }
 

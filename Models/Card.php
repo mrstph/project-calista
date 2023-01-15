@@ -1,72 +1,88 @@
 <?php
 
-// namespace Models;
+namespace Models;
 
-// use PDO;
+use PDO;
 
-// class Card extends Model
-// {
-//     /**
-//      * The DB table name.
-//      *
-//      * @var string
-//      */
-//     protected $table = 'list_app';
+class Card extends Model
+{
+    /**
+     * The DB table name.
+     *
+     * @var string
+     */
+    protected $table = 'Card';
 
-//     public $id;
-//     public $name_list_app;
-//     public $creation_date_list_app;
-//     public $position_list_app;
-//     public $id_board;
+    public $id;
+    public $name_card;
+    public $position_card;
+    public $creation_date_card;
+    public $starting_date_card;
+    public $due_date_card;
+    public $content_card;
+    public $color_card;
+    public $id_list_app;
 
-//     /**
-//      * fetch() + hydrate()
-//      *
-//      * @param int|string $id
-//      * @return List_app
-//      */
-//     public static function find($id): List_app
-//     {
-//         return parent::find($id);
-//     }
+    /**
+     * fetch() + hydrate()
+     *
+     * @param int|string $id
+     * @return Card
+     */
+    public static function find($id): Card
+    {
+        return parent::find($id);
+    }
 
-//     /**
-//      * @param int|string $id
-//      * @return bool
-//      */
-//     public static function updateList_app(array $data)
-//     {
-//         return parent::update($data);
-//     }
+    /**
+     * @param int|string $id
+     * @return bool
+     */
+    public static function updateCard(array $data)
+    {
+        return parent::update($data);
+    }
 
-//     /**
-//      * Create a row List_app in BD.
-//      *
-//      * @param array $data
-//      * @return List_app
-//      */
-//     public static function createList_app(array $data): List_app
-//     {
-//         return parent::create($data);
-//     }
+    /**
+     * Create a row Card in BD.
+     *
+     * @param array $data
+     * @return Card
+     */
+    public static function createCard(array $data): Card
+    {
 
-//     /**
-//      * @return User
-//      */
-//     public function user(): User_app
-//     {
-//         return User_app::find($this->id);
-//     }
+        $model = new static();
 
-//     /**
-//      * @return Card
-//      */
-//     public function showcard(): array
-//     {
-//         $model = new Card();
+        $lastPosition = $model::select("SELECT MAX(position_card) as position FROM {$model->getTable()}", [], 1)['position'];
 
-//         return $this->select("SELECT * FROM {$model->getTable()} WHERE id_list_pp = :list_id", [
-//             'list_id' => $this->id,
-//         ]);
-//     }
-// }
+        $data = array_merge(
+            $data,
+            ['position_card' => ($lastPosition + 1)]
+        );
+
+        return parent::create($data);
+    }
+
+    //NOT SURE ABOUT THE CREATION CARD POSITION THING
+
+    /**
+     * @return User
+     */
+    public function user(): User_app
+    {
+        return User_app::find($this->id);
+    }
+
+    /**
+     * @return Card
+     */
+    public function showCard(): array
+    {
+        $model = new Card();
+
+        return $this->select("SELECT * FROM {$model->getTable()} WHERE id_list_pp = :list_id", [
+            'list_id' => $this->id,
+        ]);
+    }
+}

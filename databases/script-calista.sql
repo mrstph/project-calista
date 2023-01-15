@@ -24,8 +24,6 @@ drop table if exists invite;
 drop table if exists should_have;
 
 
-
-
 CREATE TABLE User_app(
    id INT AUTO_INCREMENT,
    email_user_app VARCHAR(100),
@@ -48,7 +46,7 @@ CREATE TABLE Board(
    color_board VARCHAR(50),
    id_user_app INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_user_app) REFERENCES User_app(id)
+   FOREIGN KEY(id_user_app) REFERENCES User_app(id) ON DELETE CASCADE
 );
 
 CREATE TABLE List_app(
@@ -58,7 +56,7 @@ CREATE TABLE List_app(
    creation_date_list_app DATE,
    id_board INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_board) REFERENCES Board(id)
+   FOREIGN KEY(id_board) REFERENCES Board(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Card(
@@ -72,7 +70,7 @@ CREATE TABLE Card(
    color_card VARCHAR(50),
    id_list_app INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_list_app) REFERENCES List_app(id)
+   FOREIGN KEY(id_list_app) REFERENCES List_app(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Role_app(
@@ -93,10 +91,10 @@ CREATE TABLE invite(
    id_board INT,
    id_role_app INT,
    PRIMARY KEY(id, id_1, id_board, id_role_app),
-   FOREIGN KEY(id) REFERENCES User_app(id),
-   FOREIGN KEY(id_1) REFERENCES User_app(id),
-   FOREIGN KEY(id_board) REFERENCES Board(id),
-   FOREIGN KEY(id_role_app) REFERENCES Role_app(id)
+   FOREIGN KEY(id) REFERENCES User_app(id) ON DELETE CASCADE,
+   FOREIGN KEY(id_1) REFERENCES User_app(id) ON DELETE CASCADE,
+   FOREIGN KEY(id_board) REFERENCES Board(id) ON DELETE CASCADE,
+   FOREIGN KEY(id_role_app) REFERENCES Role_app(id) ON DELETE CASCADE
 );
 
 CREATE TABLE should_have(
@@ -104,7 +102,7 @@ CREATE TABLE should_have(
    id_permission INT,
    PRIMARY KEY(id, id_permission),
    FOREIGN KEY(id) REFERENCES Role_app(id),
-   FOREIGN KEY(id_permission) REFERENCES Permission(id)
+   FOREIGN KEY(id_permission) REFERENCES Permission(id) ON DELETE CASCADE
 );
 
 #insert data into User_app
