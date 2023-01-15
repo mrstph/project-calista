@@ -51,9 +51,9 @@ class User_app extends Model
     }
 
     /**
-     * @param string $email
-     * @param string $password
-     * @return false|User
+     * @param string $email_user_app
+     * @param string $password_user_app
+     * @return false|User_app
      */
     public static function findUserByCredentials(string $email_user_app, string $password_user_app)
     {
@@ -63,7 +63,7 @@ class User_app extends Model
             "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email AND password_user_app = :password",
             [
                 ':email' => $email_user_app,
-                ':password' => $password_user_app,
+                ':password' => $password_user_app
             ],
             1
         );

@@ -40,6 +40,7 @@ require_once 'Controllers/Controller.php';
 require_once 'Controllers/HomeController.php';
 require_once 'Controllers/BoardsController.php';
 require_once 'Controllers/List_appController.php';
+require_once 'Controllers/User_appController.php';
 
 // Auth
 require_once 'Controllers/Auth/AuthController.php';
