@@ -14,6 +14,18 @@
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <?php if ($board->color_board === "blue") {
+        echo ('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+    } else if ($board->color_board === "red") {
+        echo ('<link rel="stylesheet" href="/assets/css/root-red-theme.css">');
+    } else if ($board->color_board === "orange") {
+        echo ('<link rel="stylesheet" href="/assets/css/root-orange-theme.css">');
+    } else {
+        echo ('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+    }
+    ?>
+
     <link rel="stylesheet" href="/assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
@@ -21,60 +33,76 @@
 <body>
     <header>
         <?php require view_path('/components/nav.php'); ?>
+        <?php require view_path('/components/board-ruban.php'); ?>
     </header>
 
     <main>
 
-        <h4>Supprimer tableau</h4>
-        <form method="POST" action="/boards/delete.php">
-            <input type="text" name="id" id="id_board" value="<?php echo $board->id; ?>" hidden>
-            <input type="submit" value="Supprimer un tableau">
-        </form>
+        <div class="dashboard container-fluid overflow-auto">
+            <div class="container-fluid">
 
-        <h4>Modifier le tableau</h4>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify-board">
-            Modifier le tableau
-        </button>
+                <!-- ~~~~ SHOW MESSAGE IF SET ~~~ -->
 
-        <h4>Ajouter une liste</h4>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-list">
-            Ajouter une liste
-        </button>
+                <?php require view_path('components/message.php'); ?>
 
-        <ul id="lists">
-            <?php foreach ($lists as $list) : ?>
-                <div><?php echo $list['name_list_app'] ?></div>
-            <?php endforeach; ?>
+                <!-- <ul class="list-group list-group-horizontal">
+                <li class="list-group-item flex-fill">An item</li>
+                <li class="list-group-item flex-fill">A second item</li>
+                <li class="list-group-item flex-fill">A third item</li>
+                <li class="list-group-item flex-fill">A fourth item</li>
+                <li class="list-group-item flex-fill">And a fifth one</li>
+            </ul> -->
 
-            <?php //foreach ($lists as $list) {
-            //echo '<li>'
-            //   . 'Title: ' . $list['name_list_app']
-            //   . ' / Id: ' . $list['id']
-            //. '</li>';
-            //}
-            ?>
-        </ul>
+                <div class="mt-4">
+                    <ul class="list-group list-group-horizontal gap-2" id="lists">
+                        <?php foreach ($lists as $list) : ?>
+                            <ul class="list-test list-group-item list-group"><?php echo $list['name_list_app'] ?>
+                                <li class="list-group">
+                                    <!-- show cards for every list -->
+                                <li class="list-group-item">An item</li>
+                                <li class="list-group-item">An other item</li>
+                                <li class="list-group-item">An other item</li>
+                                <li class="list-group-item">An other item</li>
+                                <li class="list-group-item">An other item</li>
+                                <li class="list-group-item">An other item</li>
+                            </ul>
+                        <?php endforeach; ?>
+
+                        <?php //foreach ($lists as $list) {
+                        //echo '<li>'
+                        //   . 'Title: ' . $list['name_list_app']
+                        //   . ' / Id: ' . $list['id']
+                        //. '</li>';
+                        //}
+                        ?>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-list">
+                            Ajouter une liste
+                        </button>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </main>
 
-    <!-- ~~~~~~~~~~ ADD LIST MODAL ~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~ CREATE LIST MODAL ~~~~~~~~~~ -->
 
     <div class="modal fade" id="create-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter une liste</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-list-create" method="post" action="/list_app/add.php">
                         <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
-                        <input type="text" name="name" id="name">
-                        <input type="submit" form="form-list-create" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
+                        <input class="mb-2 form-control" type="text" name="name" id="name" placeholder="Nom de liste">
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <input type="submit" form="form-list-create" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -87,18 +115,52 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h2 class="modal-title fs-5" id="exampleModalLabel">Modifier : <?php echo ($board->name_board) ?></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-modify-board" method="post" action="/boards/update.php">
                         <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
-                        <input type="text" name="name" id="name">
-                        <input type="text" name="color" id="color">
-                        <input type="submit" form="form-modify-board" class="btn btn-primary" value="Modifier le tableau" data-bs-dismiss="modal">
+                        <input class="mb-2 form-control" type="text" name="name" id="name" placeholder="Nom du tableau">
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%;">
+                            <input type="radio" class="btn-check" name="color" id="btnradio1" autocomplete="off" value="blue">
+                            <label class="btn btn-outline-primary" for="btnradio1">Bleu</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio2" autocomplete="off" value="red">
+                            <label class="btn btn-outline-primary" for="btnradio2">Rouge</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio3" autocomplete="off" value="orange">
+                            <label class="btn btn-outline-primary" for="btnradio3">Orange</label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <input type="submit" form="form-modify-board" class="btn btn-primary" value="Modifier" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~ DELETE BOARD MODAL ~~~~~~~~~~ -->
+
+    <div class="modal fade" id="delete-board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="exampleModalLabel">Supprimer : <?php echo $board->name_board ?> </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-delete-board" method="post" action="/boards/delete.php">
+                        <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
+                        <p class="text-justify">Êtes vous sûr de vouloir supprimer le tableau <strong><?php echo $board->name_board; ?></strong> ? <br>Tout son contenu sera supprimé et ne pourra être récupéré. Cette action est irreversible.<br> Pour continuer, écrivez "SUPPRIMER" en majuscule dans le champ ci-dessous puis cliquez sur supprimer.
+                        </p>
+                        <input class="mb-2 form-control" type="text" name="delete" id="delete" placeholder="SUPPRIMER">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" form="form-delete-board" class="btn btn-danger" value="Supprimer" data-bs-dismiss="modal">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

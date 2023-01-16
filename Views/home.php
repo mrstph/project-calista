@@ -14,6 +14,20 @@
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <!-- ~~~~ THEME CSS FILE  ~~~~ -->
+    
+    <?php if($user->color_user_app === "blue"){
+            echo('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+        } else if($user->color_user_app === "red") {
+            echo('<link rel="stylesheet" href="/assets/css/root-red-theme.css">');
+        } else if($user->color_user_app === "orange"){
+            echo('<link rel="stylesheet" href="/assets/css/root-orange-theme.css">');
+        } else {
+            echo('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+        }
+    ?>
+
     <link rel="stylesheet" href="assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
@@ -25,6 +39,10 @@
 
     <main>
         <div class="container">
+
+            <!-- ~~~~ SHOW MESSAGE IF SET ~~~ -->
+            
+            <?php require view_path('components/message.php'); ?>
 
             <!-- ~~~~~~~~~~ SHOW BOARDS FOR USER ~~~~~~~~~~ -->
 
@@ -41,15 +59,15 @@
 
             <!-- ~~~~~~~~~~ BUTTON FOR ADDING NEW BOARD ~~~~~~~~~~ -->
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-board">
-                Créer un tableau
+            <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#create-board">
+                    Créer un tableau
             </button>
 
         </div>
 
     </main>
 
-    <!-- ~~~~~~~~~~ ADD LIST MODAL ~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~ CREATE BOARD MODAL ~~~~~~~~~~ -->
 
     <div class="modal fade" id="create-board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -62,7 +80,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="form-create-board" method="post" action="/boards/add.php">
-                        <!-- form control size ok but not color -->
                         <input class="mb-2 form-control" type="text" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%;">
                             <input type="radio" class="btn-check" name="color" id="btnradio1" autocomplete="off" value="blue">
