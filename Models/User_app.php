@@ -75,6 +75,29 @@ class User_app extends Model
         return $userModel->hydrate($result);
     }
 
+    /**
+     * @param string $email_user_app
+     * @return false|User_app
+     */
+    public static function findUserByEmail(string $email_user_app)
+    {
+        $userModel = new self();
+
+        $result = $userModel->select( //$userModel::select instead?
+            "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email",
+            [
+                ':email' => $email_user_app
+            ],
+            1
+        );
+
+        if (!$result) {
+            return false;
+        }
+
+        return $userModel->hydrate($result);
+    }
+
 
     /**
      * @param Board $board

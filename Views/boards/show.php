@@ -15,17 +15,8 @@
 
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
-    <?php if ($board->color_board === "blue") {
-        echo ('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
-    } else if ($board->color_board === "red") {
-        echo ('<link rel="stylesheet" href="/assets/css/root-red-theme.css">');
-    } else if ($board->color_board === "orange") {
-        echo ('<link rel="stylesheet" href="/assets/css/root-orange-theme.css">');
-    } else {
-        echo ('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
-    }
-    ?>
-
+    <!-- ~~~~ THEME CSS FILE  ~~~~ -->
+    <link rel="stylesheet" href="/assets/css/root-<?php echo $board->color_board; ?>-theme.css">
     <link rel="stylesheet" href="/assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
@@ -45,45 +36,43 @@
 
                 <?php require view_path('components/message.php'); ?>
 
-                <!-- <ul class="list-group list-group-horizontal">
-                <li class="list-group-item flex-fill">An item</li>
-                <li class="list-group-item flex-fill">A second item</li>
-                <li class="list-group-item flex-fill">A third item</li>
-                <li class="list-group-item flex-fill">A fourth item</li>
-                <li class="list-group-item flex-fill">And a fifth one</li>
-            </ul> -->
 
                 <div class="mt-4">
-                    <ul class="list-group list-group-horizontal gap-2" id="lists">
-                        <?php foreach ($lists as $list) : ?>
-                            <ul class="list-test list-group-item list-group"><?php echo $list['name_list_app'] ?>
-                                <li class="list-group">
-                                    <!-- show cards for every list -->
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">An other item</li>
-                                <li class="list-group-item">An other item</li>
-                                <li class="list-group-item">An other item</li>
-                                <li class="list-group-item">An other item</li>
-                                <li class="list-group-item">An other item</li>
-                            </ul>
-                        <?php endforeach; ?>
 
-                        <?php //foreach ($lists as $list) {
-                        //echo '<li>'
-                        //   . 'Title: ' . $list['name_list_app']
-                        //   . ' / Id: ' . $list['id']
-                        //. '</li>';
-                        //}
-                        ?>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-list">
-                            Ajouter une liste
-                        </button>
+                    <!-- ~~~~~~~~~~ TEST ~~~~~~~~~~ -->
+
+                    <ul id="lists" class="list-group list-group-horizontal gap-3">
+                        <?php foreach ($lists as $list) : ?>
+                            <li class="list-style list-group">
+                                <div class="list-group-item list-group">
+                                    <h3><?php echo $list['name_list_app'] ?></h3>
+                                    <ul class="list-group">
+                                        <?php //foreach ($list->cards as $card) : 
+                                        ?>
+                                        <li class="list-group">
+                                            <div class="list-group-item">
+                                                <h3><?php //echo $card['name_card'] 
+                                                    ?></h3>
+                                                <p><?php //echo $card['content_card'] 
+                                                    ?></p>
+                                            </div>
+                                        </li>
+                                        <?php //endforeach;
+                                        ?>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                        <li>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-list">
+                                Ajouter une liste
+                            </button>
+                        </li>
                     </ul>
                 </div>
-
             </div>
         </div>
+
     </main>
 
     <!-- ~~~~~~~~~~ CREATE LIST MODAL ~~~~~~~~~~ -->
@@ -198,13 +187,26 @@
                     // .then((response) => response.text().then((value) => console.log(value))) // FOR DEBUG
                     .then((response) => response.json())
                     .then((json) => {
-                        document.getElementById('lists').innerHTML =
-                            document.getElementById('lists').innerHTML + (
-                                '<li>' +
-                                'Title: ' + json.list.name_list_app +
-                                ' / Id: ' + json.list.id +
-                                ' / Position: ' + json.list.position +
-                                '</li>');
+                        // let ul = document.getElementById('lists');
+                        // let li = document.createElement('li');
+                        // li.innerHTML = json.list_app.name_list_app;
+                        // ul.append(li);
+
+                        let ul = document.getElementById('lists');
+                        ul.innerHTML += `<li>
+                                    <div class="list-group-item list-group">
+                                        <h3>` + json.list_app.name_list_app + `</h3>
+                                        <ul class="list-group">
+                                            <li>
+                                                <div class="list-group-item">
+                                                    <h3>value</h3>
+                                                    <p>value</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>`;
+
                         console.log(json);
                     })
                     .catch((error) => {
@@ -216,3 +218,5 @@
 </body>
 
 </html>
+
+<!-- li.classList.add('fraise') // ajouter une classe -->

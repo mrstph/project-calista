@@ -8,7 +8,7 @@ abstract class AuthController extends Controller
 {
     public function checkEmail(string $email): bool
     {
-       
+
 
 
 

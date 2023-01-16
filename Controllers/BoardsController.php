@@ -27,8 +27,8 @@ class BoardsController extends Controller
     {
         $name_board = $_POST['nameboard'];
         $color_board = $this->checkColor($_POST['color']);
-        $id_user_app = session('id');
- 
+        $id = session('id');
+
         $data = [
             'name_board' => $name_board,
             // 'cration_date_board' => /* date now*/,
@@ -67,7 +67,12 @@ class BoardsController extends Controller
      */
     public function update()
     {
-        if (empty($_POST['name'])){   
+        if (empty($_POST['name']) && empty($_POST['color'])) {
+            $id = $_POST['id_board'];
+            return redirect('/boards/show.php?id=' . $id);
+        }
+
+        if (empty($_POST['name'])) {
             $color_board = $_POST['color'];
             $id = $_POST['id_board'];
             $data = [
@@ -76,7 +81,16 @@ class BoardsController extends Controller
             ];
         }
 
-        if(!empty($_POST['name'])){
+        if (!empty($_POST['name'])) {
+            $name_board = $_POST['name'];
+            $id = $_POST['id_board'];
+            $data = [
+                'name_board' => $name_board,
+                'id' => $id
+            ];
+        }
+
+        if (!empty($_POST['name'] && !empty($_POST['color']))) {
             $name_board = $_POST['name'];
             $color_board = $_POST['color'];
             $id = $_POST['id_board'];
@@ -100,7 +114,7 @@ class BoardsController extends Controller
         $boardId = $_POST['id_board'];
         $delete = $_POST['delete'];
 
-        if ($delete === "SUPPRIMER"){
+        if ($delete === "SUPPRIMER") {
             Board::delete($boardId);
             messages('Votre tableau a été supprimé avec succès.', 'alert-success');
             return redirect('/home.php');
@@ -121,11 +135,11 @@ class BoardsController extends Controller
 
         // }
         // return $color;
-        if($color == 'red'){
+        if ($color == 'red') {
             return $color;
-        } else if ($color == 'blue'){
+        } else if ($color == 'blue') {
             return $color;
-        } else if ($color == 'orange'){
+        } else if ($color == 'orange') {
             return $color;
         } else {
             return $color = 'blue';

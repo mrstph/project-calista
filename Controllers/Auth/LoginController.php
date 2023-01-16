@@ -37,8 +37,6 @@ class LoginController extends AuthController
 
         $email = $_POST['mail'];
         $pass = $_POST['password'];
-        // $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        //filter_var(, FILTER_VALIDATE_EMAIL);
 
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
@@ -47,11 +45,16 @@ class LoginController extends AuthController
         }
 
         // Get model user hydrated
-        $user = User_app::findUserByCredentials($email, $pass);
+        $user = User_app::findUserByEmail($email);
 
         // Check user
         if (!$user) {
             messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
+            return redirect('/login.php');
+        }
+
+        if (!password_verify($pass, $user->password_user_app)) {
+            messages('Indentifiants incorrects');
             return redirect('/login.php');
         }
 
