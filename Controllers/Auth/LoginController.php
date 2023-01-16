@@ -42,7 +42,8 @@ class LoginController extends AuthController
 
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
-            messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
+            // messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
+            
             return redirect('/login.php');
         }
 
@@ -51,7 +52,7 @@ class LoginController extends AuthController
 
         // Check user
         if (!$user) {
-            messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
+            messages('Identifiant(s) inconnu(s)'); // Add a message in session (see method in supports/helpers.php)
             return redirect('/login.php');
         }
 

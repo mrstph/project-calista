@@ -42,9 +42,10 @@ class RegisterController extends AuthController
         $password_user_app = $_POST['password'];
 
         // Validation form
-        if (!$this->checkEmail($email_user_app) or !$this->checkPassword($password_user_app) or !$this->checkPassword($first_name_user_app) or !$this->checkPassword($last_name_user_app)) {
-            messages('Tous les champs doivent être remplis'); // Add a message in session (see method in supports/helpers.php)
+        if (!$this->checkEmail($email_user_app) or !$this->checkPassword($password_user_app) ) {
+            // messages('Tous les champs doivent être remplis'); // Add a message in session (see method in supports/helpers.php)
             return redirect('/register.php');
+            // exit();
         }
 
         // Response OK

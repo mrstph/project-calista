@@ -35,11 +35,12 @@
 
             <form class="mt-4" method="post" action="login.php">
               <div class="form-floating mb-3">
-                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" required>
+                <input type="text" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail"  required >
+                
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
+                <input type="text" class="form-control" name="password" id="password" placeholder="Mot de passe" >
                 <label for="password">Mot de passe</label>
                 <i class="far fa-eye" id="togglePassword"></i>
               </div>
