@@ -26,9 +26,9 @@ class BoardsController extends Controller
     public function add()
     {
         $name_board = $_POST['nameboard'];
-        $color_board = $_POST['color'];
+        $color_board = $this->checkColor($_POST['color']);
         $id_user_app = session('id');
-        
+ 
         $data = [
             'name_board' => $name_board,
             // 'cration_date_board' => /* date now*/,
@@ -54,10 +54,9 @@ class BoardsController extends Controller
         }
 
         $board = Board::find($boardId);
-        $lists = $board->enumerations();
-
+        $lists = $board->listapp();
         // Sort lists by position
-        usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
+        // usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
 
         return $this->view('boards/show.php', [
             'board' => $board,
@@ -70,14 +69,29 @@ class BoardsController extends Controller
      */
     public function update()
     {
-        $boardId = $_POST['id'];
-        $data = [
-            // ... $_POST
-        ];
+        if (empty($_POST['name'])){   
+            $color_board = $_POST['color'];
+            $id = $_POST['id_board'];
+            $data = [
+                'color_board' =>  $color_board,
+                'id' => $id
+            ];
+        }
 
-        $board = Board::update($boardId, $data);
+        if(!empty($_POST['name'])){
+            $name_board = $_POST['name'];
+            $color_board = $_POST['color'];
+            $id = $_POST['id_board'];
+            $data = [
+                'name_board' => $name_board,
+                'color_board' =>  $color_board,
+                'id' => $id
+            ];
+        }
 
-        return redirect('/boards/show.php?id=' . $boardId);
+        Board::updateBoard($data, $id);
+
+        return redirect('/boards/show.php?id=' . $id);
     }
 
     /**
@@ -85,9 +99,38 @@ class BoardsController extends Controller
      */
     public function delete()
     {
-        $boardId = $_POST['id'];
-        Board::delete($boardId);
+        $boardId = $_POST['id_board'];
+        $delete = $_POST['delete'];
 
-        return redirect('/home.php');
+        if ($delete === "SUPPRIMER"){
+            Board::delete($boardId);
+            messages('Votre tableau a été supprimé avec succès.', 'alert-success');
+            return redirect('/home.php');
+        } else {
+            messages('Veuillez écrire "SUPPRIMER" en majuscule pour supprimer le tableau.');
+            return redirect('/boards/show.php?id=' . $boardId);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function checkColor($color)
+    {
+        // if($color != 'blue' or $color != 'red' or $color != 'orange' or $color == null){
+        //     $color = 'blue';
+        //     return $color;
+
+        // }
+        // return $color;
+        if($color == 'red'){
+            return $color;
+        } else if ($color == 'blue'){
+            return $color;
+        } else if ($color == 'orange'){
+            return $color;
+        } else {
+            return $color = 'blue';
+        }
     }
 }

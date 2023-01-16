@@ -43,7 +43,7 @@
                 <label for="firstname">Prénom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" required>
+                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">

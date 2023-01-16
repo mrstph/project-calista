@@ -34,7 +34,7 @@ CREATE TABLE User_app(
    first_name_user_app VARCHAR(50),
    last_name_user_app VARCHAR(50),
    state_of_account_user_app BOOLEAN,
-   color_user_app VARCHAR(50),
+   color_user_app VARCHAR(50) DEFAULT 'blue',
    profile_picture_user_app VARCHAR(50),
    creation_date_user_app DATE,
    PRIMARY KEY(id_user_app)
@@ -109,9 +109,9 @@ CREATE TABLE should_have(
 
 #insert data into User_app
 
-insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (1, 'bmainstone0@weibo.com', 'admin', 'c1a8da2f18d78d0e12278a724ca6adb1119e53dcbfb16807e0eb97dbcd925ad4', 'Baldwin', 'Mainstone', false, 'Aquamarine', 'Indigo', '2023-07-08');
-
-/* insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (2, 'knoir1@bing.com', 'super-admin', 'e31b9ef0fd24fdf838908f1596c05edcb6452f1a80ae1b901fba8190e942c768', 'Kilian', 'Noir', false, 'Blue', 'Khaki', '2023-01-20');
+insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, profile_picture_user_app, creation_date_user_app) values ('bmainstone0@weibo.com', 'admin', 'c1a8da2f18d78d0e12278a724ca6adb1119e53dcbfb16807e0eb97dbcd925ad4', 'Baldwin', 'Mainstone', false, 'Indigo', '2023-07-08');
+insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values ('knoir1@bing.com', 'super-admin', 'e31b9ef0fd24fdf838908f1596c05edcb6452f1a80ae1b901fba8190e942c768', 'Kilian', 'Noira', false, 'red', 'Khaki', '2023-01-20');
+/* 
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (3, 'mdew2@sogou.com', 'super-admin', 'fa83d04d5ac0919151b899fce57478f2e2fe32dfeffd191f95140d47b475c12a', 'Morly', 'Dew', false, 'Green', 'Goldenrod', '2023-02-04');
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (4, 'cbirkwood3@yale.edu', 'super-admin', '5b310fe642292a0548e0a959baf3372e1e8bbfe5aaf027bd6c23346a88269cdc', 'Cyrus', 'Birkwood', false, 'Indigo', 'Orange', '2023-05-04');
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (5, 'ecrichmer4@bizjournals.com', 'super-admin', 'eb63e7012bdbb14ca2fff5e2e6bc1d232aad7f97a98465250d839b728458a0c3', 'Ediva', 'Crichmer', true, 'Violet', 'Pink', '2023-10-13');
