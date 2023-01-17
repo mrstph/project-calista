@@ -85,4 +85,16 @@ class Card extends Model
             'list_id' => $this->id,
         ]);
     }
+
+    /**
+     * @return Card
+     */
+    public static function getCardsFromListIds(array $listIds): array
+    {
+        $model = new Card();
+
+        return $model->select("SELECT * FROM {$model->getTable()} WHERE id_list_app IN (:list_ids)", [
+            'list_ids' => implode(',', $listIds),
+        ]);
+    }
 }

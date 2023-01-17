@@ -6,6 +6,7 @@ use PDO;
 use Models\Board;
 use Models\List_app;
 use Models\User_app;
+use Models\Card;
 
 class BoardsController extends Controller
 {
@@ -25,7 +26,7 @@ class BoardsController extends Controller
      */
     public function add()
     {
-        $name_board = $_POST['nameboard'];
+        $name_board = trim($_POST['nameboard']);
         $color_board = $this->checkColor($_POST['color']);
         $id = session('id');
 
@@ -53,8 +54,29 @@ class BoardsController extends Controller
 
         $board = Board::find($boardId);
         $lists = $board->listapp();
+
+        $listIds = [];
+        $newLists = [];
+        foreach($lists as $list) {
+            $listIds[] = $list['id'];
+            $newLists[$list['id']] = $list;
+            $newLists[$list['id']]['cards'] = [];
+        }
+        $lists = $newLists;
+        unset($newLists);
+
+        $cards = Card::getCardsFromListIds($listIds);
+        foreach($cards as $card) {
+            $lists[$card['id_list_app']]['cards'][] = $card;
+        }
+        unset($cards);
+
         // Sort lists by position
-        // usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
+        usort($lists, fn ($a, $b) => $a['position_list_app'] <=> $b['position_list_app']);
+        foreach($lists as &$list) {
+            usort($list['cards'], fn ($a, $b) => $a['position_card'] <=> $b['position_card']);
+        }
+        // dd($lists);
 
         return $this->view('boards/show.php', [
             'board' => $board,
@@ -129,12 +151,6 @@ class BoardsController extends Controller
      */
     public function checkColor($color)
     {
-        // if($color != 'blue' or $color != 'red' or $color != 'orange' or $color == null){
-        //     $color = 'blue';
-        //     return $color;
-
-        // }
-        // return $color;
         if ($color == 'red') {
             return $color;
         } else if ($color == 'blue') {

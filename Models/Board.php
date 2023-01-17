@@ -43,6 +43,7 @@ class Board extends Model
     {
         return parent::update($data, $id);
     }
+    
     /**
      * Create a row Board in BD.
      *

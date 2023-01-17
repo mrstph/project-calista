@@ -49,6 +49,16 @@ class List_app extends Model
     }
 
     /**
+     * @param int|string $id
+     * @return bool
+     */
+
+    public static function updateList_app(array $data, $id)
+    {
+         return parent::update($data, $id);
+    }
+
+    /**
      * @return User
      */
     public function board(): Board

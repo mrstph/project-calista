@@ -43,7 +43,7 @@ CREATE TABLE Board(
    name_board VARCHAR(50),
    creation_date_board DATETIME,
    position_board INT,
-   color_board VARCHAR(50),
+   color_board VARCHAR(50) DEFAULT 'blue',
    id_user_app INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_user_app) REFERENCES User_app(id) ON DELETE CASCADE
@@ -198,7 +198,9 @@ insert into List_app (id_list_app, name_list_app, position_list_app, creation_da
 
 #inserting data into Card
 
-insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('Name', 96, '2023-01-20', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', '2023-01-09', '2023-02-24', 'Goldenrod', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 1', 1, '2023-01-20', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', '2023-01-09', '2023-02-24', 'red', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 2', 2, '2023-01-20', 'Lorem ipsum testum', '2023-01-09', '2023-02-24', 'orange', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 3', 3, '2023-01-21', 'Je suis une carte', '2023-01-09', '2023-02-24', 'orange', 1);
 /*
 insert into Card (id_card, name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values (2, null, 28, '2023-01-21', 'In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.', '2023-01-16', '2023-03-19', 'Indigo', 2);
 insert into Card (id_card, name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values (3, null, 92, '2023-01-10', 'Nulla tellus.', '2023-01-17', '2023-05-07', 'Turquoise', 3);

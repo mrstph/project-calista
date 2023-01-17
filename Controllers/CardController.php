@@ -34,7 +34,8 @@ class CardController extends Controller
                 'card' => [
                     'id' => $card->id,
                     'name_list_app' => $card->name_card,
-                    'id_list' => $card->id_list
+                    // 'id_list' => $card->id_list
+
                     // 'position_list_app' => $list->position_list_app,
                     // 'creation_date_list_app' => ,
                 ],

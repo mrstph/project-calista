@@ -39,25 +39,39 @@
 
                 <div class="mt-4">
 
-                    <!-- ~~~~~~~~~~ TEST ~~~~~~~~~~ -->
+                    <!-- ~~~~~~~~~~ DISPLAYING LISTS & CARDS  ~~~~~~~~~~ -->
 
                     <ul id="lists" class="list-group list-group-horizontal gap-3">
                         <?php foreach ($lists as $list) : ?>
-                            <li class="list-style list-group">
+                            <li id="<?php echo "list-". $list['id']?>" class="list-style list-group">
                                 <div class="list-group-item list-group">
                                     <h3><?php echo $list['name_list_app'] ?></h3>
+                                        <div class="my-2">
+                                            <button data-id="<?php echo $list['id']?>" type="button" class="modify-list-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify-list">
+                                                Modifier
+                                            </button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-list">
+                                                Supprimer
+                                            </button>
+                                        </div>
                                     <ul class="list-group">
-                                        <?php //foreach ($list->cards as $card) : 
-                                        ?>
-                                        <li class="list-group">
+                                        <?php foreach ($list['cards'] as $card) : ?>
+                                        <li class="list-group my-2" data-id="<?php echo $card['id']?>">
                                             <div class="list-group-item">
-                                                <h3><?php //echo $card['name_card'] 
-                                                    ?></h3>
-                                                <p><?php //echo $card['content_card'] 
-                                                    ?></p>
+                                                <h4><?php echo $card['name_card']?></h4>
+                                                <p><?php echo $card['content_card']?></p>
+                                                <div class="my-2">
+                                                <button data-id="<?php echo $list['id']?>" type="button" class="modify-card-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify-card">
+                                                    Modifier
+                                                </button>
+                                                <button type="button" class="btn btn-danger delete-card-button" data-bs-toggle="modal" data-bs-target="#delete-card">
+                                                    Supprimer
+                                                </button>
                                             </div>
+                                            </div>
+       
                                         </li>
-                                        <?php //endforeach;
+                                        <?php endforeach;
                                         ?>
                                     </ul>
                                 </div>
@@ -75,7 +89,7 @@
 
     </main>
 
-    <!-- ~~~~~~~~~~ CREATE LIST MODAL ~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~ CREATE LIST MODAL - OK ~~~~~~~~~~ -->
 
     <div class="modal fade" id="create-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -92,7 +106,30 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-list-create" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~ MODIFY LIST MODAL - TESTING ~~~~~~~~~~ -->
+
+    <div class="modal fade" id="modify-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="exampleModalLabel">Modifier : <?php echo $list['name_list_app']?></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-modify-list" method="post" action="/list_app/update.php">
+                        <input class="mb-2 form-control" type="text" name="name" id="name-modify-list" value="">
+                        <input type="text" name="id" id="id-modify-list" value="" hidden>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" form="form-modify-list" class="btn btn-primary modify-list-button" value="Modifier" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
@@ -125,7 +162,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-modify-board" class="btn btn-primary" value="Modifier" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
@@ -150,7 +187,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-delete-board" class="btn btn-danger" value="Supprimer" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
@@ -161,20 +198,92 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        let myModal = document.getElementById('create-list');
+        let createList = document.getElementById('create-list');
+        let modifyList = document.getElementById('modify-list');
+        let modifyBoard = document.getElementById('modify-board');
         let myInput = document.getElementById('name');
 
         //when modal is shown, put the focus on the input field
-        myModal.addEventListener('shown.bs.modal', () => {
+        createList.addEventListener('shown.bs.modal', () => {
             myInput.focus();
         });
+
+        //when modal is shown, put the focus on the input field
+        modifyList.addEventListener('shown.bs.modal', () => {
+            myInput.focus();
+        });
+        
         //when modal is hidden, reset the value of the input field
-        myModal.addEventListener('hidden.bs.modal', () => {
+        createList.addEventListener('hidden.bs.modal', () => {
             myInput.value = "";
         });
-    </script>
 
-    <script>
+        // DELETE CARDS
+        Array.from(document.getElementsByClassName('delete-card-button')).forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                const id = event.target.getAttribute('data-id');
+                let form = new FormData();
+                form.append('id', id);
+
+                fetch("/cards/delete.php", {
+                    method: "POST",
+                    body: form,
+                })
+                // .then((response) => response.text().then((value) => console.log(value))) // FOR DEBUG
+                .then((response) => response.json())
+                .then((json) => {
+                    if (json.success) {
+                        event.target.remove();
+                    } else {
+                        // ERROR
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            });
+        });
+
+        //MODIFY MODAL LIST
+        Array.from(document.getElementsByClassName('modify-list-button')).forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                const id = event.target.getAttribute('data-id');
+                let listLi = document.getElementById('list-' + id).querySelector('h3').textContent;
+                document.getElementById('name-modify-list').setAttribute("value",listLi);
+                document.getElementById('id-modify-list').setAttribute("value",id);;
+            });
+        });
+
+        // MODIFY LIST
+        Array.from(document.getElementsByClassName('modify-list-button')).forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                const id = event.target.getAttribute('data-id');
+                let form = new FormData();
+                form.append('id', id);
+
+
+                fetch("/list_app/update.php", {
+                    method: "POST",
+                    body: form,
+                })
+            // .then((response) => response.text().then((value) => console.log(value))) // FOR DEBUG
+                .then((response) => response.json())
+                .then((json) => {
+                    if (json.success) {
+                        // event.target.; // new html with updated title
+                    } else {
+                        // ERROR
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            });
+        });
+
+        // ADD LIST
         document
             .getElementById('form-list-create')
             .addEventListener('submit', function(event) {
@@ -187,10 +296,6 @@
                     // .then((response) => response.text().then((value) => console.log(value))) // FOR DEBUG
                     .then((response) => response.json())
                     .then((json) => {
-                        // let ul = document.getElementById('lists');
-                        // let li = document.createElement('li');
-                        // li.innerHTML = json.list_app.name_list_app;
-                        // ul.append(li);
 
                         let ul = document.getElementById('lists');
                         ul.innerHTML += `<li>
@@ -218,5 +323,3 @@
 </body>
 
 </html>
-
-<!-- li.classList.add('fraise') // ajouter une classe -->

@@ -85,7 +85,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-create-board" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

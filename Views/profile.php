@@ -14,6 +14,10 @@
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <!-- ~~~~ THEME CSS FILE  ~~~~ -->
+    <link rel="stylesheet" href="/assets/css/root-<?php echo $user->color_user_app; ?>-theme.css">
+
     <link rel="stylesheet" href="/assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>

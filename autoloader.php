@@ -30,6 +30,7 @@ require_once 'Models/Model.php';
 require_once 'Models/User_app.php';
 require_once 'Models/Board.php';
 require_once 'Models/List_app.php';
+require_once 'Models/Card.php';
 
 /*
  * Controllers Loader
@@ -41,6 +42,7 @@ require_once 'Controllers/HomeController.php';
 require_once 'Controllers/BoardsController.php';
 require_once 'Controllers/List_appController.php';
 require_once 'Controllers/User_appController.php';
+require_once 'Controllers/CardController.php';
 
 // Auth
 require_once 'Controllers/Auth/AuthController.php';
