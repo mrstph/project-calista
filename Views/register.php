@@ -35,19 +35,19 @@
 
             <form class="mt-4" method="post" action="register.php">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom" required>
+                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom" >
                 <label for="lastname">Nom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom" required>
+                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom">
                 <label for="firstname">Prénom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <input type="text" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" >
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
                 <label for="password">Mot de passe</label>
                 <i class="far fa-eye" id="togglePassword"></i>
               </div>
