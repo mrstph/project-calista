@@ -13,8 +13,8 @@
 
   <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
-  <link rel="stylesheet" href="assets/css/bootstrap.css">
-  <link rel="stylesheet" href="assets/css/custom-style.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/custom-style-login.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
@@ -43,7 +43,7 @@
                 <label for="firstname">Prénom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" required>
+                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">

@@ -40,10 +40,10 @@ class RegisterController extends AuthController
         $email_user_app = $_POST['mail'];
         $password_user_app = $_POST['password'];
 
-        // $password_user_app = password_hash($_POST['password'], PASSWORD_DEFAULT);
+       
         
         //Validation form
-        // dd($this->checkPassword($password_user_app));
+        
         if(!$this->checkEmail($email_user_app) or !$this->checkPassword($password_user_app)){
             return redirect('/register.php');
 

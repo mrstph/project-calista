@@ -11,16 +11,12 @@ class Board extends Model
      */
     protected $table = 'board';
 
-    // public $id;
-    // public $user_id;
-    // public $title;
-
     public $id;
     public $name_board;
     public $creation_date_board;
     public $position_board;
     public $color_board;
-    public $id_user_app; //keep it?
+    public $id_user_app;
 
     // public function getName()
     // {
@@ -47,6 +43,7 @@ class Board extends Model
     {
         return parent::update($data, $id);
     }
+    
     /**
      * Create a row Board in BD.
      *

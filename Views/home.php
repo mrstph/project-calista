@@ -14,6 +14,10 @@
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <!-- ~~~~ THEME CSS FILE  ~~~~ -->
+    <link rel="stylesheet" href="/assets/css/root-<?php echo $user->color_user_app; ?>-theme.css">
+
     <link rel="stylesheet" href="assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
@@ -25,6 +29,10 @@
 
     <main>
         <div class="container">
+
+            <!-- ~~~~ SHOW MESSAGE IF SET ~~~ -->
+
+            <?php require view_path('components/message.php'); ?>
 
             <!-- ~~~~~~~~~~ SHOW BOARDS FOR USER ~~~~~~~~~~ -->
 
@@ -41,7 +49,7 @@
 
             <!-- ~~~~~~~~~~ BUTTON FOR ADDING NEW BOARD ~~~~~~~~~~ -->
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-board">
+            <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#create-board">
                 Créer un tableau
             </button>
 
@@ -49,10 +57,10 @@
 
     </main>
 
-    <!-- ~~~~~~~~~~ ADD LIST MODAL ~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~ CREATE BOARD MODAL ~~~~~~~~~~ -->
 
     <div class="modal fade" id="create-board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title fs-5" id="exampleModalLabel">Créer un tableau</h2>
@@ -62,13 +70,22 @@
                 </div>
                 <div class="modal-body">
                     <form id="form-create-board" method="post" action="/boards/add.php">
-                        <input type="text" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
-                        <input type="text" name="color" id="color" placeholder="Couleur">
+                        <input class="mb-2 form-control" type="text" name="nameboard" id="nameboard" placeholder="Nom du tableau" required>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%;">
+                            <input type="radio" class="btn-check" name="color" id="btnradio1" autocomplete="off" value="blue">
+                            <label class="btn btn-outline-primary" for="btnradio1">Bleu</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio2" autocomplete="off" value="red">
+                            <label class="btn btn-outline-primary" for="btnradio2">Rouge</label>
+
+                            <input type="radio" class="btn-check" name="color" id="btnradio3" autocomplete="off" value="orange">
+                            <label class="btn btn-outline-primary" for="btnradio3">Orange</label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-create-board" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
@@ -80,8 +97,7 @@
 
     <script>
         let myModal = document.getElementById('create-board');
-        let myInput = document.getElementById('name');
-        let button = document.querySelectorAll('input[typer="submit"]');
+        let myInput = document.getElementById('nameboard');
 
         //when modal is shown, put the focus on the input field
         myModal.addEventListener('shown.bs.modal', () => {

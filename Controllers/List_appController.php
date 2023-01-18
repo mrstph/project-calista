@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Models\List_app;
+use Models\Board;
+use Models\Card;
 
 class List_appController extends Controller
 {
@@ -33,7 +35,7 @@ class List_appController extends Controller
                 'list_app' => [
                     'id' => $list->id,
                     'name_list_app' => $list->name_list_app,
-                    // 'position_list_app' => $list->position_list_app,
+                    'position_list_app' => $list->position_list_app,
                     // 'creation_date_list_app' => ,
                     'id_board' => $list->id_board
                 ],
@@ -44,5 +46,37 @@ class List_appController extends Controller
             ];
         }
         return $this->responseJson($json);
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    
+    /**
+     * @return null|void
+     */
+    public function update()
+    {
+
+        if (empty($_POST['name'])) {
+            return $this->responseJson(['message'=>'Le nom de la liste n\'a pas été modifié.', 'success' => false]);
+        }
+
+        $id = $_POST['id'];
+        $data = [
+            'name_list_app' => $_POST['name'],
+        ];
+
+        List_app::update($data, $id);
+
+        return $this->responseJson(['success' => true]);
+    }
+
+    /**
+     * @return null|void
+     */
+    public function delete()
+    {
+        $list = $_POST['id'];
+
+            Board::delete($list);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use PDO;
+
 class List_app extends Model
 {
     /**
@@ -10,11 +12,6 @@ class List_app extends Model
      * @var string
      */
     protected $table = 'list_app';
-
-    // public $id;
-    // public $board_id;
-    // public $position;
-    // public $title;
 
     public $id;
     public $name_list_app;
@@ -52,10 +49,35 @@ class List_app extends Model
     }
 
     /**
+     * @param int|string $id
+     * @return bool
+     */
+
+    public static function updateList_app(array $data, $id)
+    {
+         return parent::update($data, $id);
+    }
+
+    /**
      * @return User
      */
     public function board(): Board
     {
         return Board::find($this->id);
+    }
+
+    /**
+     * @return array
+     */
+    public function cards()
+    {
+        $CardModel = new Card();
+
+        $req = $this->db()->prepare("SELECT * FROM {$CardModel->getTable()} WHERE id_list_app = :id");
+        $req->execute([
+            ':id' => $this->id,
+        ]);
+
+        return $req->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 }
