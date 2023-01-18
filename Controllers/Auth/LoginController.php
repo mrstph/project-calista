@@ -55,9 +55,9 @@ class LoginController extends AuthController
 
         // Get model user hydrated
         
-        // $user = User_app::findUserByCredentials($email,$password_user_app);
+        
         $user = User_app::findUserByEmail($email);
-        // dd($user);
+       
         // Check user
         if (!$user) {
             messages('Identifiant(s) inconnu(s)'); // Add a message in session (see method in supports/helpers.php)
