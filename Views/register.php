@@ -35,25 +35,26 @@
 
             <form class="mt-4" method="post" action="register.php">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom" >
+                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom" required>
                 <label for="lastname">Nom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom">
+                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom" required>
                 <label for="firstname">Prénom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" >
+                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" required>
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
                 <label for="password">Mot de passe</label>
                 <i class="far fa-eye" id="togglePassword"></i>
               </div>
               <p id="text-obligation">Pour une sécurité optimale de votre mot de passe, celui-ci doit être composé de 8 caractères minimum comprenant au moins une minuscule, une majuscule, un chiffre (0-9) et un caractère spécial.</p>
+
               <div class="d-grid">
-                <button class="btn btn-orange fw-bold" type="submit">Créer un compte</button>
+                <button class="btn btn-orange fw-bold" type="submit" name = "submit">Créer un compte</button>
               </div>
               <div class="text-center my-4">
                 <a href="login.php" class="link-account-form">Se connecter</a>

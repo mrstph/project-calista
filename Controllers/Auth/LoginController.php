@@ -3,6 +3,9 @@
 namespace Controllers\Auth;
 
 use Models\User_app;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 class LoginController extends AuthController
 {
@@ -37,24 +40,37 @@ class LoginController extends AuthController
 
         $email = $_POST['mail'];
         $pass = $_POST['password'];
-        // $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        //filter_var(, FILTER_VALIDATE_EMAIL);
-
+        // $password_user_app = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // $xx = password_verify($pass,$password_user_app);
+        
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
             // messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
             
             return redirect('/login.php');
-        }
+         }
+        
+
+        
 
         // Get model user hydrated
-        $user = User_app::findUserByCredentials($email, $pass);
-
+        
+        // $user = User_app::findUserByCredentials($email,$password_user_app);
+        $user = User_app::findUserByEmail($email);
+        // dd($user);
         // Check user
         if (!$user) {
             messages('Identifiant(s) inconnu(s)'); // Add a message in session (see method in supports/helpers.php)
             return redirect('/login.php');
         }
+
+        if(!password_verify($pass, $user->password_user_app)){
+            messages('Mot de passe incorrect');
+            return redirect('/login.pphp');
+        }
+
+        
+
 
         // Define the auth information in session
         session('id', $user->id);

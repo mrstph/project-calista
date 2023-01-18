@@ -32,7 +32,7 @@ CREATE TABLE User_app(
    first_name_user_app VARCHAR(50),
    last_name_user_app VARCHAR(50),
    state_of_account_user_app BOOLEAN,
-   color_user_app VARCHAR(50),
+   color_user_app VARCHAR(50) DEFAULT 'blue',
    profile_picture_user_app VARCHAR(50),
    creation_date_user_app DATE,
    PRIMARY KEY(id)
@@ -40,10 +40,10 @@ CREATE TABLE User_app(
 
 CREATE TABLE Board(
    id INT auto_increment,
-   name_board VARCHAR(50),
+   name_board VARCHAR(200),
    creation_date_board DATETIME,
    position_board INT,
-   color_board VARCHAR(50),
+   color_board VARCHAR(50) DEFAULT 'blue',
    id_user_app INT NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_user_app) REFERENCES User_app(id) ON DELETE CASCADE
@@ -51,7 +51,7 @@ CREATE TABLE Board(
 
 CREATE TABLE List_app(
    id INT auto_increment,
-   name_list_app VARCHAR(50),
+   name_list_app VARCHAR(200),
    position_list_app INT,
    creation_date_list_app DATE,
    id_board INT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE List_app(
 
 CREATE TABLE Card(
    id INT auto_increment,
-   name_card VARCHAR(50),
+   name_card VARCHAR(200),
    position_card INT,
    starting_date_card DATE,
    content_card VARCHAR(2000),
@@ -107,8 +107,8 @@ CREATE TABLE should_have(
 
 #insert data into User_app
 
-insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values ('bmainstone0@weibo.com', 'admin', 'c1a8da2f18d78d0e12278a724ca6adb1119e53dcbfb16807e0eb97dbcd925ad4', 'Baldwin', 'Mainstone', false, 'Aquamarine', 'Indigo', '2023-07-08');
-insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values ('knoir1@bing.com', 'super-admin', 'e31b9ef0fd24fdf838908f1596c05edcb6452f1a80ae1b901fba8190e942c768', 'Kilian', 'Noir', false, 'Blue', 'Khaki', '2023-01-20');
+insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, profile_picture_user_app, creation_date_user_app) values ('bmainstone0@weibo.com', 'admin', '$2y$10$XnGgAJdn3WN12G/7Q5BIb.U62aRbLWueoeeRA0mEZgCo66K5DadQS', 'Baldwin', 'Mainstone', false, 'blue', '2023-07-08');
+insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values ('knoir1@bing.com', 'super-admin', 'e31b9ef0fd24fdf838908f1596c05edcb6452f1a80ae1b901fba8190e942c768', 'Kilian', 'Noira', false, 'red', 'Khaki', '2023-01-20');
 /* 
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (3, 'mdew2@sogou.com', 'super-admin', 'fa83d04d5ac0919151b899fce57478f2e2fe32dfeffd191f95140d47b475c12a', 'Morly', 'Dew', false, 'Green', 'Goldenrod', '2023-02-04');
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (4, 'cbirkwood3@yale.edu', 'super-admin', '5b310fe642292a0548e0a959baf3372e1e8bbfe5aaf027bd6c23346a88269cdc', 'Cyrus', 'Birkwood', false, 'Indigo', 'Orange', '2023-05-04');
@@ -137,9 +137,9 @@ insert into User_app (id_user_app, email_user_app, type_account_user_app, passwo
 
 # insert data into Board
 
-insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Cardguard', '2022-03-01', 44, 'Turquoise', 1);
-insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Zontrax', '2022-11-01', 100, 'Pink', 1);
-insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ( 'Tres-Zap', '2022-02-11', 52, 'Fuscia', 2);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Cardguard', '2022-03-01', 44, 'blue', 1);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Zontrax', '2022-11-01', 100, 'red', 1);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ( 'Tres-Zap', '2022-02-11', 52, 'orange', 2);
 
 /*
 insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (4, 'Span', '2022-10-22', 90, 'Teal', 4);
@@ -169,7 +169,7 @@ insert into Board (id_board, name_board, creation_date_board, position_board, co
 
 insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Aero 8', 1, '2023-01-07', 1);
 insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('9000', 2, '2023-01-18', 2);
-insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Pajero', 3, '2023-01-07', 2);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Pajero', 3, '2023-01-07', 3);
 
 /*
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (3, 'Neon', 3, '2023-01-07', 3);
@@ -198,7 +198,12 @@ insert into List_app (id_list_app, name_list_app, position_list_app, creation_da
 
 #inserting data into Card
 
-insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('Name', 96, '2023-01-20', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', '2023-01-09', '2023-02-24', 'Goldenrod', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 1', 1, '2023-01-20', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', '2023-01-09', '2023-02-24', 'red', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 2', 2, '2023-01-20', 'Lorem ipsum testum', '2023-01-09', '2023-02-24', 'orange', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 3', 3, '2023-01-21', 'Je suis une carte', '2023-01-09', '2023-02-24', 'orange', 1);
+insert into Card (name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values ('card 4', 4, '2023-01-21', 'Je suis une carte', '2023-01-09', '2023-02-24', 'orange', 3);
+
+
 /*
 insert into Card (id_card, name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values (2, null, 28, '2023-01-21', 'In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.', '2023-01-16', '2023-03-19', 'Indigo', 2);
 insert into Card (id_card, name_card, position_card, starting_date_card, content_card, creation_date_card, due_date_card, color_card, id_list_app) values (3, null, 92, '2023-01-10', 'Nulla tellus.', '2023-01-17', '2023-05-07', 'Turquoise', 3);

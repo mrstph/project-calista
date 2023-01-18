@@ -49,7 +49,18 @@ class RegisterController extends AuthController
 
         }
 
+        //Get unique user
+        $UserUnique = User_app::findUserByEmail($email_user_app);
+        
+        //check if user is unique
+
+        if ($UserUnique){
+            messages('Cette adresse e-mail est déjà utilisée');
+            return redirect('/register.php');
+        }
+
         $password_user_app = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
 
         
         // Response OK
@@ -61,6 +72,7 @@ class RegisterController extends AuthController
             'email_user_app' => $email_user_app,
             'password_user_app' => $password_user_app
         ];
+        
 
         $user->createUser($data);
 
