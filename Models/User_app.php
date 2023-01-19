@@ -100,23 +100,23 @@ class User_app extends Model
 
 
 
-    public static function findUserByEmail(string $email)
-    {
-        $userModel = new self();
-        $result = $userModel-> select(
-            "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email",
-            [
-                ':email' =>$email,
-            ],
-            1
-        );
+    // public static function findUserByEmail(string $email)
+    // {
+    //     $userModel = new self();
+    //     $result = $userModel-> select(
+    //         "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email",
+    //         [
+    //             ':email' =>$email,
+    //         ],
+    //         1
+    //     );
 
-        if(!$result){
-            return false;
-        }
+    //     if(!$result){
+    //         return false;
+    //     }
 
-        return $userModel->hydrate($result);
-    }
+    //     return $userModel->hydrate($result);
+    // }
 
 
     /**
