@@ -50,7 +50,7 @@
                 <a href="register.php" class="link-account-form">Créer un compte</a>
               </div>
               <div class="text-center my-4">
-                <a href="forgottenpassword.php" class="link-account-form">Mot de passe oublié</a>
+                <a href="#" class="link-account-form">Mot de passe oublié</a>
               </div>
             </form>
           </div>

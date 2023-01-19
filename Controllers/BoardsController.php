@@ -53,7 +53,7 @@ class BoardsController extends Controller
         }
 
         // Security to check if the Board is updatable by user
-        
+
         if (!Board::checkBoardOwnership($boardId, parent::getCurrentUserId())) {
             messages("Nous n'avons pas trouvé cet élément.");
             return redirect('/home.php');
