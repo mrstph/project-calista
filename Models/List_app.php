@@ -55,7 +55,7 @@ class List_app extends Model
 
     public static function updateList_app(array $data, $id)
     {
-         return parent::update($data, $id);
+        return parent::update($data, $id);
     }
 
     /**
@@ -79,5 +79,32 @@ class List_app extends Model
         ]);
 
         return $req->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    }
+
+    /**
+     * Check if the user can modify the list.
+     * @return bool
+     */
+    public static function checkListOwnership($idList, $idUser): bool
+    {
+        $ListModel = new List_app();
+        $BoardModel = new Board();
+        $UserModel = new User_app();
+
+        $result = self::select(
+            "SELECT list_app.id FROM {$ListModel->getTable()} 
+            INNER JOIN {$BoardModel->getTable()} 
+            ON list_app.id_board = board.id
+            INNER JOIN {$UserModel->getTable()}
+            ON board.id_user_app = user_app.id
+            WHERE user_app.id = :idUser and list_app.id = :idList",
+            [
+                ':idList' => $idList,
+                ':idUser' => $idUser
+            ],
+            1
+        );
+
+        return (!empty($result));
     }
 }

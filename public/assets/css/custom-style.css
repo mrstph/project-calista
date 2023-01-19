@@ -1,3 +1,7 @@
+body {
+    background-color: var(--bs-secondary);
+}
+
 /* ~~~~~~~~ FONTS ~~~~~~~~ */
 
 @font-face {
@@ -10,8 +14,8 @@ h1, h2, h3, h4, a, p {
     color: var(--bs-primary);
 }
 
-body {
-    background-color: var(--bs-secondary);
+h2, h3 {
+    font-size: 1.6rem;
 }
 
 a {
@@ -120,4 +124,12 @@ a:hover {
 
 .dashboard {
     height: calc(100vh - (180px));
+}
+
+.button-add-list {
+    min-width: 142px;
+}
+
+.button-add-list-li {
+    list-style: none;
 }

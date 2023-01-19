@@ -9,16 +9,16 @@
     <meta name="description" content="???">
     <meta name="author" content="Chris Balla & Stéphane Muller">
     <title>Calista | Mon espace de travail</title>
-    <link rel="icon" type="image/x-icon" href="assets/pictures/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/assets/pictures/favicon.svg">
 
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
     <!-- ~~~~ THEME CSS FILE  ~~~~ -->
     <link rel="stylesheet" href="/assets/css/root-<?php echo $user->color_user_app; ?>-theme.css">
 
-    <link rel="stylesheet" href="assets/css/custom-style.css">
+    <link rel="stylesheet" href="/assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 

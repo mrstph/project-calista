@@ -13,7 +13,8 @@ require_once 'configs/database.php';
 
 // Force debug
 if (APP_ENVIRONNEMENT !== 'production') {
-    ini_set('display_errors', 1);
+    ini_set('display_errors', 1); // display errors for dev if set to 1 - change to 0 before prod
+    ini_set('log_errors', 0); // put error in log if set to 1 - change to 1 before prod
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }

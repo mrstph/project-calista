@@ -43,7 +43,7 @@ class Board extends Model
     {
         return parent::update($data, $id);
     }
-    
+
     /**
      * Create a row Board in BD.
      *
@@ -64,6 +64,7 @@ class Board extends Model
     }
 
     /**
+     * Return all lists from a board.
      * @return List_App
      */
     public function listapp(): array
@@ -73,5 +74,24 @@ class Board extends Model
         return $this->select("SELECT * FROM {$model->getTable()} WHERE id_board = :board_id", [
             'board_id' => $this->id,
         ]);
+    }
+
+    /**
+     * Check if the user can modify the board.
+     * @return bool
+     */
+    public static function checkBoardOwnership($idBoard, $idUser): bool
+    {
+        $model = new Board();
+
+        $result = self::select(
+            "SELECT id FROM {$model->getTable()} WHERE {$model->getIdentifier()} = :id AND id_user_app = :id_user_app",
+            [
+                ':id' => $idBoard,
+                ':id_user_app' => $idUser
+            ],
+            1
+        );
+        return (!empty($result));
     }
 }

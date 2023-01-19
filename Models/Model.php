@@ -66,6 +66,7 @@ abstract class Model
         $sqlValues = implode(', ', $sqlValues);
 
         $req = self::db()->prepare("INSERT INTO {$instance->getTable()} ($sqlKeys) VALUE ($sqlValues)");
+
         $req->execute($bindData);
 
         $instance->{$instance->getIdentifier()} = self::db()->lastInsertId();
@@ -94,6 +95,7 @@ abstract class Model
         $setStatements = implode(', ', $setStatements);
 
         $query = "UPDATE {$instance->getTable()} SET {$setStatements} WHERE id = :id";
+        // dd($bindData);
         $stmt = self::db()->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->execute($bindData);

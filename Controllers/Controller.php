@@ -80,7 +80,7 @@ abstract class Controller
 
         if (file_exists($filePath)) {
             ob_start();
-            //get user and board infos everywhere from the session and send it on every pages with view
+            //get user and board (for nav) infos everywhere from the session and send it on every pages with view
             $userid = self::getCurrentUserId();
             if ($userid) {
                 $user = User_app::find($userid);

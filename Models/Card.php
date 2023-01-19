@@ -87,6 +87,7 @@ class Card extends Model
     }
 
     /**
+     * Return all cards from a list.
      * @return Card
      */
     public static function getCardsFromListIds(array $listIds): array
@@ -96,5 +97,35 @@ class Card extends Model
         return $model->select("SELECT * FROM {$model->getTable()} WHERE id_list_app IN (:list_ids)", [
             'list_ids' => implode(',', $listIds),
         ]);
+    }
+
+    /**
+     * Check if the user can modify the card.
+     * @return bool
+     */
+    public static function checkCardOwnership($idCard, $idUser): bool
+    {
+        $ListModel = new List_app();
+        $BoardModel = new Board();
+        $UserModel = new User_app();
+        $CardModel = new Card();
+
+        $result = self::select(
+            "SELECT card.id FROM {$CardModel->getTable()} 
+            INNER JOIN {$ListModel->getTable()} 
+            ON card.id_list_app = list_app.id
+            INNER JOIN {$BoardModel->getTable()}
+            ON list_app.id_board = board.id
+            INNER JOIN {$UserModel->getTable()}
+            ON board.id_user_app = user_app.id
+            WHERE user_app.id = :idUser and card.id = :idCard",
+            [
+                ':idCard' => $idCard,
+                ':idUser' => $idUser
+            ],
+            1
+        );
+
+        return (!empty($result));
     }
 }
