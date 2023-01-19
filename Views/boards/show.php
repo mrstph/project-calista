@@ -43,7 +43,7 @@
 
                     <ul id="lists" class="list-group list-group-horizontal gap-3">
                         <?php foreach ($lists as $list) : ?>
-                            <li id="<?php echo "list-" . $list['id'] ?>" class="list-style list-group">
+                            <li id="<?php echo "list-" . $list['id'] ?>" class="list-style list-group list-max-width">
                                 <div class="list-group-item list-group">
                                     <h2 id="<?php echo "title-" . $list['id'] ?>"><?php echo $list['name_list_app'] ?></h2>
                                     <div class="my-2">
@@ -101,6 +101,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form-card-create" method="post" action="/card/add.php">
+                        <!-- how to append the good id_list to the input -->
                         <input type="number" name="id_list" id="id_list" value='' hidden>
                         <input class="mb-2 form-control" type="text" name="name_card" id="name" placeholder="Nom de la carte">
                         <textarea class="form-control" id="content-card" name="content_card" row="3" col="5"></textarea>
@@ -268,7 +269,7 @@
             myInput.value = "";
         });
 
-        // ~~~~~~~~~~ UPDATE MODAL LIST ~~~~~~~~~~ //
+        // ~~~~~~~~~~ UPDATE LIST MODAL ~~~~~~~~~~ //
 
         Array.from(document.getElementsByClassName('modify-list-button')).forEach(function(element) {
             element.addEventListener('click', function(event) {
@@ -280,7 +281,7 @@
             });
         });
 
-        // ~~~~~~~~~~ DELETE MODAL LIST ~~~~~~~~~~ //
+        // ~~~~~~~~~~ DELETE LIST MODAL ~~~~~~~~~~ //
 
         Array.from(document.getElementsByClassName('delete-list-button')).forEach(function(element) {
             element.addEventListener('click', function(event) {
@@ -369,7 +370,7 @@
                     .then((json) => {
                         if (json.success === true) {
                             let ul = document.getElementById('lists');
-                            ul.innerHTML += `<li id="list- ` + json.list_app.id + `" class="list-style list-group">
+                            ul.innerHTML += `<li id="list- ` + json.list_app.id + `" class="list-style list-group list-max-width">
                                             <div class="list-group-item list-group">
                                                 <h2 id="title-` + json.list_app.id + `">` + json.list_app.name_list_app + `</h2>
                                                 <div class="my-2">

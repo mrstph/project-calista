@@ -10,17 +10,15 @@ abstract class AuthController extends Controller
     {
         if (empty($email)) {
             messages("L'adresse mail doit être renseignée.");
-            
         } else {
             $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
-            if(!$email){
+            if (!$email) {
                 messages('Le format de l\'adresse email doit être valide.');
             }
 
             return $email;
         }
-  
     }
 
     public function checkPassword(string $password): bool
