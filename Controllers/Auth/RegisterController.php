@@ -42,7 +42,6 @@ class RegisterController extends AuthController
 
         // Validation form
         if (!$this->checkEmail($email_user_app) or !$this->checkPassword($password_user_app)) {
-            messages('test');
             return redirect('/register.php');
         }
 
