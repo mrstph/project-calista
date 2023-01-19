@@ -13,7 +13,8 @@ require_once 'configs/database.php';
 
 // Force debug
 if (APP_ENVIRONNEMENT !== 'production') {
-    ini_set('display_errors', 1);
+    ini_set('display_errors', 1); // display errors for dev if set to 1 - change to 0 before prod
+    ini_set('log_errors', 0); // put error in log if set to 1 - change to 1 before prod
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }
@@ -29,8 +30,8 @@ require_once 'supports/helpers.php';
 require_once 'Models/Model.php';
 require_once 'Models/User_app.php';
 require_once 'Models/Board.php';
-require_once 'Models/Enumeration.php';
 require_once 'Models/List_app.php';
+require_once 'Models/Card.php';
 
 /*
  * Controllers Loader
@@ -40,9 +41,9 @@ require_once 'Models/List_app.php';
 require_once 'Controllers/Controller.php';
 require_once 'Controllers/HomeController.php';
 require_once 'Controllers/BoardsController.php';
-// require_once 'Controllers/EnumerationsController.php';
 require_once 'Controllers/List_appController.php';
 require_once 'Controllers/User_appController.php';
+require_once 'Controllers/CardController.php';
 
 // Auth
 require_once 'Controllers/Auth/AuthController.php';

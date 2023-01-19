@@ -24,10 +24,8 @@ drop table if exists invite;
 drop table if exists should_have;
 
 
-
-
 CREATE TABLE User_app(
-   id_user_app INT AUTO_INCREMENT,
+   id INT AUTO_INCREMENT,
    email_user_app VARCHAR(100),
    type_account_user_app VARCHAR(50),
    password_user_app VARCHAR(64),
@@ -37,33 +35,33 @@ CREATE TABLE User_app(
    color_user_app VARCHAR(50) DEFAULT 'blue',
    profile_picture_user_app VARCHAR(50),
    creation_date_user_app DATE,
-   PRIMARY KEY(id_user_app)
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE Board(
-   id_board INT auto_increment,
-   name_board VARCHAR(50),
+   id INT auto_increment,
+   name_board VARCHAR(200),
    creation_date_board DATETIME,
    position_board INT,
-   color_board VARCHAR(50),
+   color_board VARCHAR(50) DEFAULT 'blue',
    id_user_app INT NOT NULL,
-   PRIMARY KEY(id_board),
-   FOREIGN KEY(id_user_app) REFERENCES User_app(id_user_app)
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_user_app) REFERENCES User_app(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE List_app(
-   id_list_app INT auto_increment,
-   name_list_app VARCHAR(50),
+   id INT auto_increment,
+   name_list_app VARCHAR(200),
    position_list_app INT,
    creation_date_list_app DATE,
    id_board INT NOT NULL,
-   PRIMARY KEY(id_list_app),
-   FOREIGN KEY(id_board) REFERENCES Board(id_board)
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_board) REFERENCES Board(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Card(
-   id_card INT auto_increment,
-   name_card VARCHAR(50),
+   id INT auto_increment,
+   name_card VARCHAR(200),
    position_card INT,
    starting_date_card DATE,
    content_card VARCHAR(2000),
@@ -71,45 +69,45 @@ CREATE TABLE Card(
    due_date_card DATE,
    color_card VARCHAR(50),
    id_list_app INT NOT NULL,
-   PRIMARY KEY(id_card),
-   FOREIGN KEY(id_list_app) REFERENCES List_app(id_list_app)
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_list_app) REFERENCES List_app(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Role_app(
-   id_role_app INT auto_increment,
+   id INT auto_increment,
    name_role_app VARCHAR(50),
-   PRIMARY KEY(id_role_app)
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE Permission(
-   id_permission INT auto_increment,
+   id INT auto_increment,
    name_permission VARCHAR(50),
-   PRIMARY KEY(id_permission)
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE invite(
-   id_user_app INT,
-   id_user_app_1 INT,
+   id INT,
+   id_1 INT,
    id_board INT,
    id_role_app INT,
-   PRIMARY KEY(id_user_app, id_user_app_1, id_board, id_role_app),
-   FOREIGN KEY(id_user_app) REFERENCES User_app(id_user_app),
-   FOREIGN KEY(id_user_app_1) REFERENCES User_app(id_user_app),
-   FOREIGN KEY(id_board) REFERENCES Board(id_board),
-   FOREIGN KEY(id_role_app) REFERENCES Role_app(id_role_app)
+   PRIMARY KEY(id, id_1, id_board, id_role_app),
+   FOREIGN KEY(id) REFERENCES User_app(id) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY(id_1) REFERENCES User_app(id) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY(id_board) REFERENCES Board(id) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY(id_role_app) REFERENCES Role_app(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE should_have(
-   id_role_app INT,
+   id INT,
    id_permission INT,
-   PRIMARY KEY(id_role_app, id_permission),
-   FOREIGN KEY(id_role_app) REFERENCES Role_app(id_role_app),
-   FOREIGN KEY(id_permission) REFERENCES Permission(id_permission)
+   PRIMARY KEY(id, id_permission),
+   FOREIGN KEY(id) REFERENCES Role_app(id),
+   FOREIGN KEY(id_permission) REFERENCES Permission(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 #insert data into User_app
 
-insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, profile_picture_user_app, creation_date_user_app) values ('bmainstone0@weibo.com', 'admin', 'c1a8da2f18d78d0e12278a724ca6adb1119e53dcbfb16807e0eb97dbcd925ad4', 'Baldwin', 'Mainstone', false, 'Indigo', '2023-07-08');
+insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, profile_picture_user_app, creation_date_user_app) values ('bmainstone0@weibo.com', 'admin', '$2y$10$XnGgAJdn3WN12G/7Q5BIb.U62aRbLWueoeeRA0mEZgCo66K5DadQS', 'Baldwin', 'Mainstone', false, 'blue', '2023-07-08');
 insert into User_app (email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values ('knoir1@bing.com', 'super-admin', 'e31b9ef0fd24fdf838908f1596c05edcb6452f1a80ae1b901fba8190e942c768', 'Kilian', 'Noira', false, 'red', 'Khaki', '2023-01-20');
 /* 
 insert into User_app (id_user_app, email_user_app, type_account_user_app, password_user_app, first_name_user_app, last_name_user_app, state_of_account_user_app, color_user_app, profile_picture_user_app, creation_date_user_app) values (3, 'mdew2@sogou.com', 'super-admin', 'fa83d04d5ac0919151b899fce57478f2e2fe32dfeffd191f95140d47b475c12a', 'Morly', 'Dew', false, 'Green', 'Goldenrod', '2023-02-04');
@@ -139,10 +137,11 @@ insert into User_app (id_user_app, email_user_app, type_account_user_app, passwo
 
 # insert data into Board
 
-insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (1, 'Cardguard', '2022-03-01', 44, 'Turquoise', 1);
-insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (2, 'Zontrax', '2022-11-01', 100, 'Pink', 1);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Cardguard', '2022-03-01', 44, 'blue', 1);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ('Zontrax', '2022-11-01', 100, 'red', 1);
+insert into Board (name_board, creation_date_board, position_board, color_board, id_user_app) values ( 'Tres-Zap', '2022-02-11', 52, 'orange', 2);
+
 /*
-insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (3, 'Tres-Zap', '2022-02-11', 52, 'Fuscia', 3);
 insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (4, 'Span', '2022-10-22', 90, 'Teal', 4);
 insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (5, 'Lotstring', '2022-10-03', 40, 'Violet', 5);
 insert into Board (id_board, name_board, creation_date_board, position_board, color_board, id_user_app) values (6, 'Matsoft', '2022-07-16', 14, 'Mauv', 6);
@@ -168,11 +167,12 @@ insert into Board (id_board, name_board, creation_date_board, position_board, co
 
 # insert data into list_app
 
-insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (1, 'Aero 8', 1, '2023-01-07', 1);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Aero 8', 1, '2023-01-07', 1);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('9000', 2, '2023-01-18', 2);
+insert into List_app (name_list_app, position_list_app, creation_date_list_app, id_board) values ('Pajero', 3, '2023-01-07', 3);
+
 /*
-insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (2, '9000', 2, '2023-01-18', 2);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (3, 'Neon', 3, '2023-01-07', 3);
-insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (4, 'Pajero', 4, '2023-01-07', 4);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (5, 'Blackwood', 5, '2023-01-16', 5);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (6, 'Pathfinder', 6, '2023-01-09', 6);
 insert into List_app (id_list_app, name_list_app, position_list_app, creation_date_list_app, id_board) values (7, 'RX-7', 7, '2023-01-17', 7);
@@ -232,13 +232,13 @@ insert into Card (id_card, name_card, position_card, starting_date_card, content
 */
 #inserting data into Role_app
 
-insert into Role_app (id_role_app, name_role_app) values (1, 'observer');
+insert into Role_app (name_role_app) values ('observer');
 /*
 insert into Role_app (id_role_app, name_role_app) values (2, 'member');
 */
 #inserting data into Permission
 
-insert into Permission (id_permission, name_permission) values (1, 'create');
+insert into Permission (name_permission) values ('create');
 /*
 insert into Permission (id_permission, name_permission) values (2, 'read');
 insert into Permission (id_permission, name_permission) values (3, 'update');

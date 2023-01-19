@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../autoloader.php';
 
-$controller = new Controllers\BoardsController();
+$controller = new Controllers\List_appController();
 switch ($_SERVER['REQUEST_METHOD']) {
-    case 'GET':
-        $controller->show();
+    case 'POST':
+        $controller->delete();
         break;
 }

@@ -5,6 +5,6 @@
             <a href="#" class="col-sm-12 col-lg-6">Politique de confidentialité</a>
         </div>
         <div class="text-center">
-        <p>&#169; 2023 Calista - Tous droits réservés.</p>
-    </div>
+            <p>&#169; 2023 Calista - Tous droits réservés.</p>
+        </div>
 </footer>

@@ -14,10 +14,10 @@ if (!function_exists('base_path')) {
     {
         // Add a slash in string begin
         if ($string and substr($string, 0, 1) !== '/') {
-            $string = '/'.$string;
+            $string = '/' . $string;
         }
 
-        return APP_BASE_PATH.$string;
+        return APP_BASE_PATH . $string;
     }
 }
 
@@ -31,10 +31,10 @@ if (!function_exists('view_path')) {
     {
         // Add a slash in string begin
         if ($string and substr($string, 0, 1) !== '/') {
-            $string = '/'.$string;
+            $string = '/' . $string;
         }
 
-        return base_path(\Controllers\Controller::VIEW_PATH.$string);
+        return base_path(\Controllers\Controller::VIEW_PATH . $string);
     }
 }
 
@@ -77,17 +77,20 @@ if (!function_exists('messages')) {
      *
      * @return array|bool
      */
-    function messages($value = null)
+    function messages($value = null, $status = null)
     {
         $messages = session('messages') ?? [];
+        if ($status === null) {
+            $status = 'alert-danger';
+        }
 
         if ($value) {
             // Set key-value in messages array
-            $messages[] = $value; // Set key-value in messages
+            $messages[] = [$value, $status];
             session('messages', $messages); // Update message in session array
             return true; // Set is ok
         }
-
+        // dd($messages);
         // Return messages array
         return $messages;
     }
@@ -117,7 +120,7 @@ if (!function_exists('redirect')) {
     function redirect(string $url, int $statusCode = 200)
     {
         http_response_code($statusCode);
-        header('Location: '.$url);
+        header('Location: ' . $url);
         exit();
     }
 }

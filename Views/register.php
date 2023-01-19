@@ -9,12 +9,12 @@
   <meta name="description" content="???">
   <meta name="author" content="Chris Balla & Stéphane Muller">
   <title>Calista | Inscription</title>
-  <link rel="icon" type="image/x-icon" href="assets/pictures/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/pictures/favicon.svg">
 
   <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
-  <link rel="stylesheet" href="assets/css/bootstrap.css">
-  <link rel="stylesheet" href="assets/css/custom-style.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/custom-style-login.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
@@ -28,7 +28,7 @@
       <div id="form-height" class="row align-items-center">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto align-items-center justify-content-center">
           <div class="card-body text-center p-4 p-sm-5">
-            <h1><img id="logo-calista" src="assets/pictures/calista-logo.svg" alt="Calista, application Trello like"></h1>
+            <h1><img id="logo-calista" src="/assets/pictures/calista-logo.svg" alt="Calista, application Trello like"></h1>
 
             <!-- ~~~~ SHOW MESSAGE IF SET ~~~ -->
             <?php require view_path('components/message.php'); ?>
@@ -43,7 +43,7 @@
                 <label for="firstname">Prénom</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" required>
+                <input type="email" class="form-control valid-input" name="mail" id="mail" placeholder="Adresse e-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                 <label for="mail">Adresse e-mail</label>
               </div>
               <div class="form-floating mb-3">
