@@ -26,7 +26,7 @@ abstract class Model
      *
      * @var string
      */
-    protected $identifier = 'id';
+    protected $identifier = 'id_user_app';
 
     /**
      * Hydrate current model process.
@@ -66,7 +66,6 @@ abstract class Model
         $sqlValues = implode(', ', $sqlValues);
 
         $req = self::db()->prepare("INSERT INTO {$instance->getTable()} ($sqlKeys) VALUE ($sqlValues)");
-
         $req->execute($bindData);
 
         $instance->{$instance->getIdentifier()} = self::db()->lastInsertId();
@@ -74,31 +73,34 @@ abstract class Model
         return $instance;
     }
 
-    /**
+        /**
      * update a row in BD.
      *
      * @param array $data
      * @return self
      */
-    public static function update(array $data, $id)
+    public static function update(array $data)
     {
         $model = new static();
         $instance = $model->hydrate($data);
 
-        $setStatements = [];
+        $sqlKeys = [];
+        $sqlValues = [];
         $bindData = [];
         foreach ($data as $key => $value) {
-            $placeholder = ':' . $key;
-            $setStatements[] = "{$key} = {$placeholder}";
-            $bindData[$placeholder] = $value;
+            $sqlKeys[] = $key;
+            $sqlValues[] = ':' . $key;
+            $bindData[':' . $key] = $value;
         }
-        $setStatements = implode(', ', $setStatements);
+        $sqlKeys = implode(', ', $sqlKeys);
+        $sqlValues = implode(', ', $sqlValues);
 
-        $query = "UPDATE {$instance->getTable()} SET {$setStatements} WHERE id = :id";
-        // dd($bindData);
-        $stmt = self::db()->prepare($query);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute($bindData);
+        // $req = self::db()->prepare("INSERT INTO {$instance->getTable()} ($sqlKeys) VALUE ($sqlValues)");
+        $req = self::db()->prepare("UPDATE {$instance->getTable()} SET ($sqlKeys) VALUE ($sqlValues)");
+        $req->execute($bindData);
+
+        $instance->{$instance->getIdentifier()} = self::db()->lastInsertId();
+
         return $instance;
     }
 

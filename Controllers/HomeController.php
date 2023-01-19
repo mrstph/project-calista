@@ -25,7 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //don't need user and boards anymore because user is sent through function View
-        return $this->view('/home.php', []);
+        $user = User_app::find(self::getCurrentUserId()); // Return a User class (model) hydrated.
+        $boards = $user->boards(); // Return a array of array
+
+        return $this->view('home.php', [
+            'user' => $user,
+            'boards' => $boards,
+        ]);
     }
 }

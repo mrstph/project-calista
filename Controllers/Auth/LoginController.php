@@ -23,7 +23,7 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        return $this->view('/login.php');
+        return $this->view('login.php');
     }
 
     /**
@@ -35,34 +35,29 @@ class LoginController extends AuthController
     {
         $this->redirectIfAuthenticated();
 
-        $email = $_POST['mail'];
+        $email = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
         $pass = $_POST['password'];
 
         // Validation form
         if (!$this->checkEmail($email) or !$this->checkPassword($pass)) {
             messages('Identifiant vide'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('/login.php');
+            return redirect('login.php');
         }
 
         // Get model user hydrated
-        $user = User_app::findUserByEmail($email);
+        $user = User_app::findUserByCredentials($email, $pass);
 
         // Check user
         if (!$user) {
             messages('Identifiant inconnu'); // Add a message in session (see method in supports/helpers.php)
-            return redirect('/login.php');
-        }
-
-        if (!password_verify($pass, $user->password_user_app)) {
-            messages('Indentifiants incorrects');
-            return redirect('/login.php');
+            return redirect('login.php');
         }
 
         // Define the auth information in session
-        session('id', $user->id);
+        session('id', $user->id_user_app);
 
         // Response OK
-        return redirect('/home.php');
+        return redirect('home.php');
     }
 
     /**
@@ -73,6 +68,6 @@ class LoginController extends AuthController
     public function logout()
     {
         session_destroy();
-        return redirect('/login.php');
+        return redirect('login.php');
     }
 }

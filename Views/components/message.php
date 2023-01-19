@@ -1,4 +1,5 @@
-<?php if ($messages = messages()) : ?>
+
+<?php if ($messages = messages()): ?>
     <section>
         <ul>
             <?php foreach ($messages as $msg) : ?>
@@ -10,5 +11,5 @@
         </ul>
     </section>
 
-    <?php unset($_SESSION['messages']); ?>
+<?php unset($_SESSION['messages']); ?>
 <?php endif; ?>

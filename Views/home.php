@@ -9,16 +9,26 @@
     <meta name="description" content="???">
     <meta name="author" content="Chris Balla & Stéphane Muller">
     <title>Calista | Mon espace de travail</title>
-    <link rel="icon" type="image/x-icon" href="/assets/pictures/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="assets/pictures/favicon.svg">
 
     <!-- ~~~~~~~~~~ CSS ~~~~~~~~~~ -->
 
-    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
 
     <!-- ~~~~ THEME CSS FILE  ~~~~ -->
-    <link rel="stylesheet" href="/assets/css/root-<?php echo $user->color_user_app; ?>-theme.css">
+    
+    <?php if($user->color_user_app === "blue"){
+            echo('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+        } else if($user->color_user_app === "red") {
+            echo('<link rel="stylesheet" href="/assets/css/root-red-theme.css">');
+        } else if($user->color_user_app === "orange"){
+            echo('<link rel="stylesheet" href="/assets/css/root-orange-theme.css">');
+        } else {
+            echo('<link rel="stylesheet" href="/assets/css/root-blue-theme.css">');
+        }
+    ?>
 
-    <link rel="stylesheet" href="/assets/css/custom-style.css">
+    <link rel="stylesheet" href="assets/css/custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
@@ -31,7 +41,7 @@
         <div class="container">
 
             <!-- ~~~~ SHOW MESSAGE IF SET ~~~ -->
-
+            
             <?php require view_path('components/message.php'); ?>
 
             <!-- ~~~~~~~~~~ SHOW BOARDS FOR USER ~~~~~~~~~~ -->
@@ -50,7 +60,7 @@
             <!-- ~~~~~~~~~~ BUTTON FOR ADDING NEW BOARD ~~~~~~~~~~ -->
 
             <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#create-board">
-                Créer un tableau
+                    Créer un tableau
             </button>
 
         </div>
@@ -85,7 +95,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="form-create-board" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -94,20 +104,7 @@
     <!-- ~~~~~~~~~~ JAVASCRIPT ~~~~~~~~~~ -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        let myModal = document.getElementById('create-board');
-        let myInput = document.getElementById('nameboard');
-
-        //when modal is shown, put the focus on the input field
-        myModal.addEventListener('shown.bs.modal', () => {
-            myInput.focus();
-        });
-        //when modal is hidden, reset the value of the input field
-        myModal.addEventListener('hidden.bs.modal', () => {
-            myInput.value = "";
-        });
-    </script>
+    <script src="assets/javascript/javascript.js"></script>
 
 </body>
 

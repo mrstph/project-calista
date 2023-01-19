@@ -13,7 +13,7 @@ class User_app extends Model
      */
     protected $table = 'user_app';
 
-    public $id;
+    public $id_user_app;
     public $email_user_app;
     public $type_account_user_app;
     public $password_user_app;
@@ -30,9 +30,9 @@ class User_app extends Model
      * @param int|string $id
      * @return Model|self
      */
-    public static function find($id)
+    public static function find($id_user_app)
     {
-        return parent::find($id);
+        return parent::find($id_user_app);
     }
 
     /**
@@ -44,16 +44,16 @@ class User_app extends Model
 
         $req = $this->db()->prepare("SELECT * FROM {$boardsModel->getTable()} WHERE id_user_app = :id_user");
         $req->execute([
-            ':id_user' => $this->id,
+            ':id_user' => $this->id_user_app,
         ]);
 
         return $req->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 
     /**
-     * @param string $email_user_app
-     * @param string $password_user_app
-     * @return false|User_app
+     * @param string $email
+     * @param string $password
+     * @return false|User
      */
     public static function findUserByCredentials(string $email_user_app, string $password_user_app)
     {
@@ -63,30 +63,7 @@ class User_app extends Model
             "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email AND password_user_app = :password",
             [
                 ':email' => $email_user_app,
-                ':password' => $password_user_app
-            ],
-            1
-        );
-
-        if (!$result) {
-            return false;
-        }
-
-        return $userModel->hydrate($result);
-    }
-
-    /**
-     * @param string $email_user_app
-     * @return false|User_app
-     */
-    public static function findUserByEmail(string $email_user_app)
-    {
-        $userModel = new self();
-
-        $result = $userModel->select( //$userModel::select instead?
-            "SELECT * FROM {$userModel->getTable()} WHERE email_user_app = :email",
-            [
-                ':email' => $email_user_app
+                ':password' => $password_user_app,
             ],
             1
         );
@@ -116,14 +93,4 @@ class User_app extends Model
     {
         return parent::create($data);
     }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->first_name_user_app . ' ' . $this->last_name_user_app;
-    }
 }
-
-// ucfirst

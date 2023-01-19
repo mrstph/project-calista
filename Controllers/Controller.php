@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use Models\User_app;
-use Models\Board;
 
 abstract class Controller
 {
@@ -80,12 +79,6 @@ abstract class Controller
 
         if (file_exists($filePath)) {
             ob_start();
-            //get user and board (for nav) infos everywhere from the session and send it on every pages with view
-            $userid = self::getCurrentUserId();
-            if ($userid) {
-                $user = User_app::find($userid);
-                $userboards = $user->boards();
-            }
             foreach ($data as $var => $value) {
                 $$var = $value;
             }
