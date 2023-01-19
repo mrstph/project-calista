@@ -44,7 +44,6 @@ class List_appController extends Controller
                 'error' => 'An error has occured !',
             ];
         }
-
         return $this->responseJson($json);
     }
 }

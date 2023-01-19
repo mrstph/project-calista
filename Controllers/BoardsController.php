@@ -57,8 +57,7 @@ class BoardsController extends Controller
         $lists = $board->listapp();
         // Sort lists by position
         // usort($lists, fn ($a, $b) => $a['position'] <=> $b['position']);
-
-        return $this->view('boards/show.php', [
+        return $this->view('/boards/show.php', [
             'board' => $board,
             'lists' => $lists,
         ]);
@@ -89,7 +88,7 @@ class BoardsController extends Controller
             ];
         }
 
-        Board::updateBoard($data, $id);
+        Board::updateBoard($data, $id); //$board = Board::update($boardId, $data);
 
         return redirect('/boards/show.php?id=' . $id);
     }

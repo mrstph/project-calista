@@ -31,6 +31,8 @@
                         <div class="dropdown-divider"></div>
                         <!-- <form action="logout.php" method="POST"><a class="dropdown-item"><input class="btn" type="submit" value="Se déconnecter"></a></form> -->
                         <a href="/logout.php" class="dropdown-item">Se déconnecter</a>
+
+                        <!-- <a class="dropdown-item" href="logout.php">Se déconnecter</a> -->
                     </div>
                 </li>
             </ul>

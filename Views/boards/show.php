@@ -30,7 +30,6 @@
 <body>
     <header>
         <?php require view_path('/components/nav.php'); ?>
-        <?php require view_path('/components/board-ruban.php'); ?>
     </header>
 
     <main>
@@ -89,13 +88,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter une liste</h2>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-list-create" method="post" action="/list_app/add.php">
                         <input type="text" name="id_board" id="id_board" value="<?php echo $board->id; ?>" hidden>
-                        <input class="mb-2 form-control" type="text" name="name" id="name" placeholder="Nom de liste">
+                        <input type="text" name="name" id="name">
+                        <input type="submit" form="form-list-create" class="btn btn-primary" value="Créer" data-bs-dismiss="modal">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -171,6 +171,7 @@
     <script>
         let myModal = document.getElementById('create-list');
         let myInput = document.getElementById('name');
+        let button = document.querySelectorAll('input[typer="submit"]');
 
         //when modal is shown, put the focus on the input field
         myModal.addEventListener('shown.bs.modal', () => {

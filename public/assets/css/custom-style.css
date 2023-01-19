@@ -6,24 +6,119 @@
     font-weight: 400;
 }
 
-h1, h2, h3, h4, a, p {
-    color: var(--bs-primary);
+/* ~~~~~~~~ VARIABLES ~~~~~~~~ */
+
+:root {
+    --primary-color: #031333;
+    --secondary-color: #EE7429;
+    --bs-link-hover-color: #EE7429;
+    --bs-font-sans-serif: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: var(--bs-secondary);
+    background-color: var(--primary-color);
+    font-family: var(--bs-font-sans-serif);
 }
 
-a {
-    color: var(--bs-primary);
+/* ~~~~~~~~ PICTURES ~~~~~~~~ */
+
+#logo-calista {
+    margin-top: 80px;
+    width: 80%;
+}
+
+/* ~~~~~~~~ FORM ~~~~~~~~ */
+
+.form-control {
+    border: 1px solid white;
+    background-color: var(--primary-color);
+}
+
+.form-control:focus {
+    background-color: var(--primary-color);
+    border: 3px solid var(--secondary-color);
+}
+
+.form-floating > label {
+    color: white;
+}
+
+.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .form-control-plaintext:focus, form-control
+.form-floating > .form-control-plaintext:not(:placeholder-shown) {
+    color: white;
+}
+
+.link-account-form {
+    color: var(--secondary-color) !important;
     text-decoration: none;
 }
 
-a:hover {
-    color: var(--bs-secondary);
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
+
+.fa-eye, .fa-eye-slash {
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    transform: translateY(-220%);
+    right: 16px;
+}
+
+#text-obligation {
+    color: #fff;
+    text-align: justify;
+}
+
+/* ~~~~ FORM INPUT BEHAVIOURS ~~~~ */
+
+input:not(:focus):not(:placeholder-shown):invalid {
+    border: 3px solid rgb(153, 33, 57);
+    transition: all .5s;
+    color: white;
+}
+
+.valid-input:not(:focus):not(:placeholder-shown):valid {
+    border: 3px solid rgb(83, 139, 83);
+    transition: all .5s;
+}
+
+.link-account-form:hover, .link-account-form:focus {
+    color: #fff !important;
+}
+
+/* ~~~~~~~~ BUTTONS ~~~~~~~~ */
+
+.btn-orange {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--secondary-color);
+    --bs-btn-border-color: var(--secondary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--secondary-color);
+    --bs-btn-hover-border-color: var(--secondary-color);
+    --bs-btn-focus-shadow-rgb: 76, 91, 106;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--secondary-color);
+    --bs-btn-active-border-color: var(--secondary-color);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--secondary-color);
+    --bs-btn-disabled-border-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 /* ~~~~~~~~ NAVBAR ~~~~~~~~ */
+
+:root {
+    --color-theme-dark: #560013;
+    --color-theme-medium: #87001E;
+    --color-theme-light: #FF7593;
+    /* add all the other colors */
+}
 
 #profile-icon-nav {
     width: 30px;
@@ -33,29 +128,22 @@ a:hover {
     width: 140px;
 }
 
+/* ~~~~ NAVBAR COLORS ~~~ */
+
 .navbar-dark {
-    background-color: var(--bs-primary);
+    background-color: var(--color-theme-dark);
     --bs-navbar-color: #fff;
-    --bs-navbar-hover-color: var(--bs-secondary);
-    --bs-navbar-active-color: var(--bs-secondary);
+    --bs-navbar-hover-color: var(--color-theme-light);
+    --bs-navbar-active-color: var(--color-theme-light);
 }
 
 .dropdown-menu {
     --bs-dropdown-bg: #fff;
-    --bs-dropdown-link-color: var(--bs-primary);
+    --bs-dropdown-link-color: var(--color-theme-dark);
     --bs-dropdown-link-hover-color: #fff;
-    --bs-dropdown-link-hover-bg: var(--bs-primary);
-    --bs-dropdown-link-active-color: var(--bs-secondary);
-    --bs-dropdown-link-active-bg: var(--bs-primary);
-}
-
-.dropdown-menu {
-    --bs-dropdown-bg: #fff;
-    --bs-dropdown-link-color: var(--bs-primary);
-    --bs-dropdown-link-hover-color: #fff;
-    --bs-dropdown-link-hover-bg: var(--bs-primary);
-    --bs-dropdown-link-active-color: var(--bs-secondary);
-    --bs-dropdown-link-active-bg: var(--bs-primary);
+    --bs-dropdown-link-hover-bg: var(--color-theme-dark);
+    --bs-dropdown-link-active-color: var(--color-theme-light);
+    --bs-dropdown-link-active-bg: var(--color-theme-dark);
 }
 
 #nav-profile-name {
@@ -82,42 +170,8 @@ a:hover {
     margin-right: 5px;
 }
 
-/* ~~~~ BUTTON ~~~ */
+/* ~~~~~~~~ FOOTER ~~~~~~~~ */
 
-.btn-primary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: var(--bs-primary);
-    --bs-btn-border-color: var(--bs-primary);
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: var(--bs-third);
-    --bs-btn-hover-border-color: var(--bs-primary);
-    --bs-btn-focus-shadow-rgb: 76, 91, 106;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: var(--bs-third);
-    --bs-btn-active-border-color: var(--bs-third);
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-
-.btn-success {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: rgb(14, 151, 14);
-    --bs-btn-border-color: rgb(14, 151, 14);
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg:  rgb(11, 109, 11);
-    --bs-btn-hover-border-color:  rgb(11, 109, 11);
-    --bs-btn-focus-shadow-rgb: 59, 198, 171;
-}
-
-/* ~~~~ BOARD PAGE ~~~ */
-
-.navbar-white {
-    background-color: #fff;
-}
-
-.list-test {
-    min-width: 300px;
-}
-
-.dashboard {
-    height: calc(100vh - (180px));
+footer a, footer p{
+    color: #fff;
 }

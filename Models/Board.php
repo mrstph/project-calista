@@ -15,12 +15,17 @@ class Board extends Model
     // public $user_id;
     // public $title;
 
-    public $id_board;
+    public $id;
     public $name_board;
     public $creation_date_board;
     public $position_board;
     public $color_board;
     public $id_user_app; //keep it?
+
+    // public function getName()
+    // {
+    //     return $this->name_board;
+    // }
 
     /**
      * fetch() + hydrate()
@@ -41,7 +46,6 @@ class Board extends Model
     {
         return parent::update($data);
     }
-
     /**
      * Create a row Borad in BD.
      *
