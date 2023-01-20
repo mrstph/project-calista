@@ -25,13 +25,15 @@ abstract class AuthController extends Controller
     {
         if (empty($password)) {
             messages("Le mot de passe doit être renseigné.");
+            return false;
         } else {
-            $password =  preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $password);
+            $valid = preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $password);
 
-            if (!$password) {
+            if (!$valid) {
                 messages("'Le mot de passe doit être composé de 8 caractères minimum 
                 comprenant au moins une minuscule, une majuscule,
                  un chiffre (0-9) et un caractère spécial.'");
+                 return false;
             }
         }
 
@@ -39,6 +41,6 @@ abstract class AuthController extends Controller
         //     messages(" le mot de passe doit être composé de 8 caractères minimum comprenant au moins une minuscule, une majuscule, un chiffre (0-9) et un caractère spécial.");
         // }
 
-        return $password;
+        return true;
     }
 }

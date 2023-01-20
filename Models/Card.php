@@ -11,7 +11,7 @@ class Card extends Model
      *
      * @var string
      */
-    protected $table = 'Card';
+    protected $table = 'card';
 
     public $id;
     public $name_card;

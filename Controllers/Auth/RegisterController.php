@@ -56,7 +56,7 @@ class RegisterController extends AuthController
             'email_user_app' => $email_user_app,
             'password_user_app' => $password_user_app
         ];
-
+        
         $user->createUser($data);
 
         messages('Votre compte a été créé avec succès !', 'alert-success');
